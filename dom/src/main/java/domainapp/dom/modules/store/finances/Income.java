@@ -1,6 +1,5 @@
 package domainapp.dom.modules.store.finances;
 
-import domainapp.dom.modules.store.stock.Product;
 import domainapp.dom.modules.store.stock.ProductStock;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.MemberOrder;

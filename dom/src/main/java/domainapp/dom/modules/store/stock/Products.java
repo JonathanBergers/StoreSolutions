@@ -16,14 +16,17 @@ import java.util.List;
 @DomainService(repositoryFor = Product.class)
 public class Products {
 
+
+
     //region > createProduct (action)
     @MemberOrder(sequence = "1")
     @Action
-    public Product createProduct(final String title, final BigDecimal price) {
+    public Product createProduct(final String title, final BigDecimal sellingPrice, final BigDecimal costPrice) {
 
         Product p = container.newTransientInstance(Product.class);
         p.setTitle(title);
-        p.setSellingPrice(price);
+        p.setSellingPrice(sellingPrice);
+        p.setCostPrice(costPrice);
 
         container.persist(p);
         return p;

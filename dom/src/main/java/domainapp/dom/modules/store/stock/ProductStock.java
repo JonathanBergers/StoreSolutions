@@ -1,6 +1,5 @@
 package domainapp.dom.modules.store.stock;
 
-import domainapp.dom.modules.stockpilemanagement.Item;
 import domainapp.dom.modules.stockpilemanagement.Stock;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.MemberOrder;
@@ -21,26 +20,27 @@ import java.math.BigDecimal;
         strategy = IdGeneratorStrategy.NATIVE,
         column = "id")
 @DomainObject
-public class ProductStock extends Stock<ProductStock, Product> {
+public class ProductStock extends Stock<Product, ProductStock> {
 
 
     /**Overriden voor datanucleus, kan generieke type blijkbaar niet ge
      *
      */
-//    //region > item (property)
-//
-//
-//    @MemberOrder(sequence = "1")
-//    @Column(allowsNull = "false")
-//    public Product getItem() {
-//        return item;
-//    }
-//
-//    @Override
-//    public void setItem(final Product item) {
-//        this.item = item;
-//    }
-//    //endregion
+    //region > item (property)
+
+    private Product item;
+
+    @MemberOrder(sequence = "1")
+    @Column(allowsNull = "false")
+    public Product getItem() {
+        return item;
+    }
+
+
+    public void setItem(final Product item) {
+        this.item = item;
+    }
+    //endregion
 //
 //
 //    //region > amount (property)
@@ -67,6 +67,8 @@ public class ProductStock extends Stock<ProductStock, Product> {
 
 
 
+
+
     //region > calculateTotalSellingPrice (action)
     @Programmatic
     public BigDecimal calculateTotalSellingPrice() {
@@ -87,7 +89,6 @@ public class ProductStock extends Stock<ProductStock, Product> {
     public BigDecimal calculateTotalCostPrice() {
         return getItem().getCostPrice().multiply(BigDecimal.valueOf(getAmount()));
     }
-
 
 
 

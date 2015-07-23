@@ -1,6 +1,7 @@
 package domainapp.dom.modules.stockpilemanagement;
 
 
+import domainapp.dom.modules.store.stock.Product;
 import org.apache.isis.applib.AbstractDomainObject;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.MemberOrder;
@@ -17,8 +18,8 @@ import javax.jdo.annotations.*;
  *
  *
  * @param <T>
- * @param <Z>
  */
+
 @PersistenceCapable(identityType = IdentityType.DATASTORE)
 @Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
 @DatastoreIdentity(
@@ -30,28 +31,25 @@ import javax.jdo.annotations.*;
 @Version(
         strategy = VersionStrategy.VERSION_NUMBER,
         column = "version")
-public   class Stock<Z extends Stock<Z, T>, T extends Item<T>>
-extends AbstractDomainObject
-        implements Comparable<Z>{
+public abstract class Stock<T extends Item<T>, Z extends Stock<T,Z>>
+extends AbstractDomainObject implements Comparable<Z>
+       {
 
-
-    //region > item (property)
-
-    private T item;
-
-    @MemberOrder(sequence = "3")
-    @Column(allowsNull = "false")
-    public T getItem() {
-        return item;
-    }
-
-
-    public void setItem(final T item) {
-        this.item = item;
-    }
-    //endregion
-
-
+           // fking bug
+//
+//           //region > item (property)
+//           protected T item;
+//
+//           @MemberOrder(sequence = "1")
+//           public T getItem() {
+//               return item;
+//           }
+//
+//           public void setItem(final T item) {
+//               this.item = item;
+//           }
+//           //endregion
+//
 
 
     //region > amount (property)
@@ -70,10 +68,6 @@ extends AbstractDomainObject
         this.amount = amount;
     }
 
-    @Override
-    public int compareTo(Z o) {
-        return 0;
-    }
 
 
     //endregion
