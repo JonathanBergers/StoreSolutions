@@ -20,6 +20,7 @@ package domainapp.fixture;
 
 import java.util.List;
 
+import domainapp.fixture.modules.StoreFixtureScript;
 import org.apache.isis.applib.annotation.Action;
 import org.apache.isis.applib.annotation.ActionLayout;
 import org.apache.isis.applib.annotation.DomainService;
@@ -49,7 +50,7 @@ public class DomainAppFixturesService extends FixtureScripts {
 
     @Override
     public FixtureScript default0RunFixtureScript() {
-        return findFixtureScriptFor(RecreateSimpleObjects.class);
+        return findFixtureScriptFor(StoreFixtureScript.class);
     }
 
     @Override
@@ -67,9 +68,9 @@ public class DomainAppFixturesService extends FixtureScripts {
             cssClassFa="fa fa-refresh"
     )
     @MemberOrder(sequence="20")
-    public Object recreateObjectsAndReturnFirst() {
-        final List<FixtureResult> run = findFixtureScriptFor(RecreateSimpleObjects.class).run(null);
-        return run.get(0).getObject();
+    public List<FixtureResult> runFixtureScript() {
+        return findFixtureScriptFor(StoreFixtureScript.class).run(null);
+
     }
 
 

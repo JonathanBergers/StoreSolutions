@@ -33,7 +33,7 @@ public class Income extends Finance {
 
         @Override
         public BigDecimal getValue() {
-                return getStock().calculateTotalCostPrice();
+                return getStock().calculateTotalSellingPrice();
         }
 
 

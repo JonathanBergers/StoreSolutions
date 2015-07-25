@@ -36,15 +36,15 @@ public class SimpleObjectGlue extends CukeGlueAbstract {
             final List<SimpleObject> findAll = service(SimpleObjects.class).listAll();
             assertThat(findAll.size(), is(n));
             putVar("list", "all", findAll);
-            
+
         } finally {
             assertMocksSatisfied();
         }
     }
-    
+
     @When("^I create a new simple object$")
     public void I_create_a_new_simple_object() throws Throwable {
         service(SimpleObjects.class).create(UUID.randomUUID().toString());
     }
-    
+
 }

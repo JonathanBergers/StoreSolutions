@@ -45,6 +45,7 @@ public abstract class Finance implements Comparable<Finance> {
     private BigDecimal value;
 
     @MemberOrder(sequence = "1")
+    @Column(allowsNull = "false")
     public BigDecimal getValue() {
         return value;
     }

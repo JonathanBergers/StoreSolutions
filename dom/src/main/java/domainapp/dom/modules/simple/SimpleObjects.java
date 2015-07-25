@@ -100,7 +100,7 @@ public class SimpleObjects {
 
     //region > injected services
 
-    @javax.inject.Inject 
+    @javax.inject.Inject
     DomainObjectContainer container;
 
     //endregion

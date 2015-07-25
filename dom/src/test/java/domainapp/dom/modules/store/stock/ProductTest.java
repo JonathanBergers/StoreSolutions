@@ -1,8 +1,7 @@
-package domainapp.dom.modules.stock;
+package domainapp.dom.modules.store.stock;
 
 import domainapp.dom.modules.AbstractBeanPropertiesTest;
-import domainapp.dom.modules.store.stock.Product;
-import org.junit.Before;
+import domainapp.dom.modules.stockpilemanagement.Stock;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -19,7 +18,7 @@ public class ProductTest {
 
         @Test
         public void test() {
-            final Product product = new Product();
+            final ProductForTesting product = new ProductForTesting();
             newPojoTester()
                     .exercise(product);
 
@@ -32,9 +31,10 @@ public class ProductTest {
 
 
 
+
             assert product != null: "product null";
-            assert product.getCostPrice().equals(BigDecimal.ONE);
-            assert product.getSellingPrice().equals(BigDecimal.TEN);
+            assert product.getCostPrice().equals(BigDecimal.ONE): "cost price incorrect";
+            assert product.getSellingPrice().equals(BigDecimal.TEN): "selling price incorrect";
 
 
 

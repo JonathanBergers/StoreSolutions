@@ -48,6 +48,17 @@ public class Products {
 
 
 
+    @Action
+    public List<Product> findByTitle(String title){
+
+        return container.allMatches(Product.class, Product.Predicates.thoseWithTitleBegins(title));
+
+    }
+
+
+
+
+
 
     @Inject
     DomainObjectContainer container;

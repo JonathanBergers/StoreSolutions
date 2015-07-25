@@ -2,7 +2,6 @@ package domainapp.dom.modules.stockpilemanagement;
 
 import org.apache.isis.applib.AbstractDomainObject;
 import org.apache.isis.applib.annotation.MemberOrder;
-import org.apache.isis.applib.annotation.Programmatic;
 
 import javax.jdo.annotations.*;
 
@@ -11,7 +10,7 @@ import javax.jdo.annotations.*;
  * Created by jonathan on 14-7-15.
  */
 
-//@PersistenceCapable(identityType = IdentityType.DATASTORE)
+@PersistenceCapable(identityType = IdentityType.DATASTORE)
 @Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
 @DatastoreIdentity(
         strategy = IdGeneratorStrategy.IDENTITY,
@@ -50,21 +49,21 @@ public class ItemElement<T extends ItemElement<T, Z>, Z extends Item<Z>>
     //endregion
 
 
-    //region > item (property)
-
-    private Z item;
-
-
-    @MemberOrder(sequence = "1")
-    @Column(allowsNull = "false")
-    @Programmatic
-    public  Z getItem() {
-        return item;
-    }
-
-    public void setItem(final Z item) {
-        this.item = item;
-    }
+//    //region > item (property)
+//
+//    private Z item;
+//
+//
+//    @MemberOrder(sequence = "1")
+//    @Column(allowsNull = "false")
+//    @Programmatic
+//    public  Z getItem() {
+//        return item;
+//    }
+//
+//    public void setItem(final Z item) {
+//        this.item = item;
+//    }
 
     @Override
     public int compareTo(T o) {

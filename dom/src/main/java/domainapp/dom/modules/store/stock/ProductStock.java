@@ -1,5 +1,7 @@
 package domainapp.dom.modules.store.stock;
 
+import com.google.common.base.Objects;
+import com.google.common.base.Predicate;
 import domainapp.dom.modules.stockpilemanagement.Stock;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.MemberOrder;
@@ -41,22 +43,6 @@ public class ProductStock extends Stock<Product, ProductStock> {
         this.item = item;
     }
     //endregion
-//
-//
-//    //region > amount (property)
-//    private int amount;
-//
-//    @MemberOrder(sequence = "1")
-//    @Column(allowsNull = "false")
-//    public int getAmount() {
-//        return amount;
-//    }
-//
-//
-//    public void setAmount(final int amount) {
-//        this.amount = amount;
-//    }
-//    //endregion
 
 
 
@@ -94,6 +80,50 @@ public class ProductStock extends Stock<Product, ProductStock> {
 
 
     //endregion
+
+
+    public static class Predicates {
+
+
+
+        public static Predicate<ProductStock> thoseWithProduct(final Product product) {
+            return new Predicate<ProductStock>() {
+                @Override
+                public boolean apply(final ProductStock ps) {
+                    return Objects.equal(ps.getItem(), product);
+                }
+            };
+        }
+
+        public static Predicate<ProductStock> thoseWithAmount(final int amount) {
+            return new Predicate<ProductStock>() {
+                @Override
+                public boolean apply(final ProductStock ps) {
+                    return Objects.equal(ps.getAmount(), amount);
+                }
+            };
+        }
+
+        public static Predicate<ProductStock> thoseWithAmountMoreThan(final int amount) {
+            return new Predicate<ProductStock>() {
+                @Override
+                public boolean apply(final ProductStock ps) {
+                    return Objects.equal(ps.getAmount() >= amount, true);
+                }
+            };
+        }
+
+        public static Predicate<ProductStock> thoseWithAmountLessThan(final int amount) {
+            return new Predicate<ProductStock>() {
+                @Override
+                public boolean apply(final ProductStock ps) {
+                    return Objects.equal(ps.getAmount() <= amount, true);
+                }
+            };
+        }
+
+
+    }
 
 
 

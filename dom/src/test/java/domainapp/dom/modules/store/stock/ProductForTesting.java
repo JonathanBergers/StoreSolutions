@@ -1,6 +1,4 @@
-package domainapp.dom.modules.stock;
-
-import domainapp.dom.modules.store.stock.Product;
+package domainapp.dom.modules.store.stock;
 
 /**
  * Created by jonathan on 23-7-15.

@@ -1,11 +1,7 @@
-package domainapp.dom.modules.stock;
+package domainapp.dom.modules.store.stock;
 
 import domainapp.dom.modules.AbstractBeanPropertiesTest;
-import domainapp.dom.modules.store.stock.Product;
-import domainapp.dom.modules.store.stock.ProductStock;
 import org.junit.Test;
-
-import java.math.BigDecimal;
 
 /**
  * Created by jonathan on 23-7-15.
@@ -28,7 +24,7 @@ public class ProductStockTest {
 
             ps.setAmount(10);
 
-            assert ps.getAmount() == 10;
+            assert ps.getAmount() == 10: "amount is not the same";
 
 
 

@@ -6,9 +6,6 @@ import domainapp.dom.modules.store.stock.Products;
 import org.apache.isis.applib.fixturescripts.FixtureScript;
 
 import javax.inject.Inject;
-import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -17,9 +14,6 @@ import java.util.List;
 public class ProductStockFixture extends FixtureScript{
 
 
-    public ProductStockFixture() {
-        withDiscoverability(Discoverability.DISCOVERABLE);
-    }
 
     @Override
     protected void execute(ExecutionContext executionContext) {

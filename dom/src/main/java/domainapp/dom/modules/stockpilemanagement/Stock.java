@@ -1,11 +1,8 @@
 package domainapp.dom.modules.stockpilemanagement;
 
 
-import domainapp.dom.modules.store.stock.Product;
 import org.apache.isis.applib.AbstractDomainObject;
-import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.MemberOrder;
-import org.apache.isis.applib.util.ObjectContracts;
 
 import javax.jdo.annotations.*;
 

@@ -3,15 +3,10 @@ package domainapp.dom.modules.stockpilemanagement;
 
 
 import org.apache.isis.applib.AbstractDomainObject;
-import org.apache.isis.applib.annotation.CollectionLayout;
 import org.apache.isis.applib.annotation.MemberOrder;
-import org.apache.isis.applib.annotation.Programmatic;
-import org.apache.isis.applib.annotation.RenderType;
 import org.apache.isis.applib.util.ObjectContracts;
 
 import javax.jdo.annotations.*;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 /**
  * Created by jonathan on 13-7-15.
@@ -49,24 +44,24 @@ extends AbstractDomainObject
     //endregion
 
 
-    //region > elements (property)
-    private SortedSet<ItemElement> elements = new TreeSet<>();
-
-    @CollectionLayout(render= RenderType.EAGERLY)
-    @Persistent(mappedBy = "storeObject", dependentElement = "true")
-    public SortedSet<ItemElement> getElements() {
-        return elements;
-    }
-
-    public void setElements(final SortedSet<ItemElement> elements) {
-        this.elements = elements;
-    }
-
-    @Programmatic
-    public void addElement(final ItemElement element){
-        elements.add(element);
-    }
-    //endregion
+//    //region > elements (property)
+//    private SortedSet<ItemElement> elements = new TreeSet<>();
+//
+//    @CollectionLayout(render= RenderType.EAGERLY)
+//    @Persistent(mappedBy = "item", dependentElement = "true")
+//    public SortedSet<ItemElement> getElements() {
+//        return elements;
+//    }
+//
+//    public void setElements(final SortedSet<ItemElement> elements) {
+//        this.elements = elements;
+//    }
+//
+//    @Programmatic
+//    public void addElement(final ItemElement element){
+//        elements.add(element);
+//    }
+//    //endregion
 
 
 
