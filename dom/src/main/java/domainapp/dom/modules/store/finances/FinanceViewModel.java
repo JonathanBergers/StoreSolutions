@@ -1,68 +1,51 @@
 package domainapp.dom.modules.store.finances;
 
-import domainapp.dom.modules.store.stock.ProductStock;
-import org.apache.isis.applib.DomainObjectContainer;
+import domainapp.dom.modules.store.stock.Product;
+import domainapp.dom.modules.store.stock.ProductSold;
 import org.apache.isis.applib.annotation.*;
-import org.joda.time.LocalDate;
 
 import javax.inject.Inject;
+import javax.jdo.annotations.Column;
+import javax.jdo.annotations.NotPersistent;
 import java.util.List;
+import java.util.SortedSet;
 
 /**
- * Created by jonathan on 23-7-15.
+ * Created by jonathan on 25-7-15.
  */
-@DomainObject(nature = Nature.VIEW_MODEL)
+@ViewModel
 public class FinanceViewModel {
 
 
 
-    @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(contributed = Contributed.AS_ASSOCIATION)
+
+    @MemberOrder(sequence = "1", name = "expenses")
+    @Collection(notPersisted = true)
     @CollectionLayout(render = RenderType.EAGERLY)
-    public List<Income> collectIncome(){
-        return finances.listAllIncome();
-
+    public List<TransactionExpense> getExpenses() {
+        return transactions.listExpenses();
     }
-
-
-    @Action
-    public Income addIncome(final ProductStock productStock){
-
-
-       return finances.createIncome(productStock, new LocalDate());
-
-
-    }
-
-    public List<ProductStock> choices0AddIncome() {
-        return container.allInstances(ProductStock.class);
-    }
-
-    //region > niks (property)
-    private Integer niks;
 
     @MemberOrder(sequence = "1")
-    public Integer getNiks() {
-        return niks;
+    @Collection(notPersisted = true)
+    @CollectionLayout(render = RenderType.EAGERLY)
+    public List<TransactionIncome> getIncome() {
+        return transactions.listIncome();
     }
 
-    public void setNiks(final Integer niks) {
-        this.niks = niks;
+
+    @MemberOrder(sequence = "2" , name = "expenses")
+    public TransactionViewModel createIncome(){
+
+        return new TransactionViewModel();
+
     }
-    //endregion
-
-
 
 
 
 
     @Inject
-    DomainObjectContainer container;
-
-    @Inject
-    Finances finances;
-
-
+    Transactions transactions;
 
 
 }

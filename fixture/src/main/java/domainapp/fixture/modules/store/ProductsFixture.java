@@ -27,8 +27,8 @@ public class ProductsFixture extends FixtureScript{
 
             BigDecimal costPrice = BigDecimal.valueOf(Math.random()*10);
             BigDecimal sellingPrice = BigDecimal.valueOf((Math.random()*10) + 5);
-
-            products.createProduct(s, sellingPrice, costPrice);
+            int amount = 10 + (int) (Math.random() *50);
+            products.createProduct(s, sellingPrice, costPrice, amount );
         }
 
 

@@ -15,18 +15,9 @@ public class ProductContributions {
 
 
 
-    //region > addStock (action)
-    @MemberOrder(sequence = "1")
-    public ProductStock addStock(final Product product, final int amount) {
-
-        ProductStock ps = container.newTransientInstance(ProductStock.class);
-        ps.setAmount(amount);
-        ps.setItem(product);
-        container.persist(ps);
 
 
-        return ps;
-    }
+
 
     //endregion
     @Inject

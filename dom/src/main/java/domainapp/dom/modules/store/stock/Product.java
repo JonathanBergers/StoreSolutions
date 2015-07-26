@@ -1,50 +1,47 @@
 package domainapp.dom.modules.store.stock;
 
-import com.google.common.base.Objects;
-import com.google.common.base.Predicate;
-import domainapp.dom.modules.stockpilemanagement.*;
+import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.*;
 
+import javax.inject.Inject;
 import javax.jdo.annotations.*;
 import java.math.BigDecimal;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 /**
  * Created by jonathan on 14-7-15.
  */
 
 
+
 @PersistenceCapable(identityType = IdentityType.DATASTORE)
 @Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
 @DatastoreIdentity(
-        strategy = IdGeneratorStrategy.NATIVE,
+        strategy = IdGeneratorStrategy.IDENTITY,
         column = "id")
-@DomainObject
-public class Product extends Item<Product> {
+@Discriminator(
+        strategy = DiscriminatorStrategy.CLASS_NAME,
+        column = "discriminator")
+@Version(
+        strategy = VersionStrategy.VERSION_NUMBER,
+        column = "version")
+@DomainObject(editing = Editing.DISABLED)
+public class Product{
 
-//
-//    /**
-//     * Bug classcast ex
-//     */
-//    //region > elements (property)
-//    private SortedSet<ProductElement> elements = new TreeSet<>();
-//
-//    @CollectionLayout(render= RenderType.EAGERLY)
-//    @Persistent(mappedBy = "item", dependentElement = "true")
-//    public SortedSet<ProductElement> getElements() {
-//        return elements;
-//    }
-//
-//    public void setElements(final SortedSet<ProductElement> elements) {
-//        this.elements = elements;
-//    }
-//
-//    @Programmatic
-//    public void addElement(final ProductElement element){
-//        elements.add(element);
-//    }
-//    //endregion
+
+
+    //region > title (property)
+    private String title;
+
+    @MemberOrder(sequence = "1")
+    @Column(allowsNull = "false")
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(final String title) {
+        this.title = title;
+    }
+    //endregion
 
 
 
@@ -52,9 +49,7 @@ public class Product extends Item<Product> {
     //region > sellingPrice (property)
     private BigDecimal sellingPrice;
 
-    public Product() {
-        super("sellingPrice");
-    }
+
 
     @MemberOrder(sequence = "2")
     @Column(allowsNull = "false")
@@ -86,78 +81,25 @@ public class Product extends Item<Product> {
     //endregion
 
 
-
-
-    //region > stock (property)
-    private SortedSet<ProductStock> stock = new TreeSet<>();
-
-    @CollectionLayout(render= RenderType.EAGERLY)
-    @Action(semantics = SemanticsOf.SAFE)
-    @Persistent(mappedBy = "item", dependentElement = "true")
-    public SortedSet<ProductStock> getStock() {
-        return stock;
-    }
-
-    public void setStock(final SortedSet<ProductStock> stock) {
-        this.stock = stock;
-    }
-
-    @Programmatic
-    public void addStock(ProductStock productStock){
-        stock.add(productStock);
-    }
-    //endregion
-
-
-    //region > available (property)
-    /**
-     * hoeveelheid beschikbare producten, nu nog gewoon het totaal van de stocks.
-     *
-     */
-
-
-
+    //region > amount (property)
+    private Integer amount;
 
     @MemberOrder(sequence = "1")
-    @Column(allowsNull = "true")
-    @NotPersistent
-    public Integer getAvailable() {
-
-        return calculateAvailable();
-
+    @Column(allowsNull = "false")
+    public Integer getAmount() {
+        return amount;
     }
 
+    public void setAmount(final Integer amount) {
+        this.amount = amount;
+    }
 
     @Programmatic
-    public Integer calculateAvailable(){
-        int amount = 0;
-        for(Stock s: getStock()){
-            amount += s.getAmount();
-        }
-        return amount;
+    public void addAmount(final Integer amount){
+        this.amount += amount;
     }
     //endregion
 
-    public static class Predicates {
-
-        public static Predicate<Product> thoseWithTitle(final String title) {
-            return new Predicate<Product>() {
-                @Override
-                public boolean apply(final Product product) {
-                    return Objects.equal(product.getTitle().toLowerCase(), title.toLowerCase());
-                }
-            };
-        }
-
-
-        public static Predicate<Product> thoseWithTitleBegins(final String title) {
-            return new Predicate<Product>() {
-                @Override
-                public boolean apply(final Product product) {
-                    return Objects.equal(product.getTitle().toLowerCase().startsWith(title.toLowerCase()), true);
-                }
-            };
-        }
 
 
 
@@ -165,8 +107,31 @@ public class Product extends Item<Product> {
 
 
 
-
-
+    //region > calculateTotalSellingPrice (action)
+    @Programmatic
+    public BigDecimal calculateTotalSellingPrice() {
+        return getSellingPrice().multiply(BigDecimal.valueOf(getAmount()));
     }
+    //endregion
+
+    //region > calculateTotal (action)
+    @Programmatic
+    public BigDecimal calculateTotalProfit() {
+        return (getSellingPrice().min(getCostPrice())).multiply(BigDecimal.valueOf(getAmount()));
+    }
+    //endregion
+
+
+    //region > calculateTotal (action)
+    @Programmatic
+    public BigDecimal calculateTotalCostPrice() {
+        return getCostPrice().multiply(BigDecimal.valueOf(getAmount()));
+    }
+
+
+
+    @Inject
+    DomainObjectContainer container;
+
 
 }

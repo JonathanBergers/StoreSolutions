@@ -1,7 +1,6 @@
 package domainapp.dom.modules.store.stock;
 
 import domainapp.dom.modules.AbstractBeanPropertiesTest;
-import domainapp.dom.modules.stockpilemanagement.Stock;
 import org.junit.Test;
 
 import java.math.BigDecimal;
