@@ -1,15 +1,17 @@
-package domainapp.dom.modules.store.stock;
+package domainapp.dom.modules.stockpilemanagement;
 
+import domainapp.dom.modules.stockpilemanagement.Product;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
+import org.apache.isis.applib.annotation.Programmatic;
 
 import javax.jdo.annotations.*;
+import java.math.BigDecimal;
 
 /**
- * Created by jonathan on 26-7-15.
+ * Created by jonathan on 25-7-15.
  */
-
 @PersistenceCapable(identityType = IdentityType.DATASTORE)
 @Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
 @DatastoreIdentity(
@@ -24,11 +26,11 @@ import javax.jdo.annotations.*;
 @DomainObject(editing = Editing.DISABLED)
 public class Stock {
 
-
     //region > amount (property)
     private Integer amount;
 
     @MemberOrder(sequence = "1")
+    @Column(allowsNull = "false")
     public Integer getAmount() {
         return amount;
     }
@@ -38,18 +40,6 @@ public class Stock {
     }
     //endregion
 
-//    //region > product (property)
-//    private T product;
-//
-//    @MemberOrder(sequence = "1")
-//    public T getProduct() {
-//        return product;
-//    }
-//
-//    public void setProduct(final T product) {
-//        this.product = product;
-//    }
-//    //endregion
 
     //region > product (property)
     private Product product;
@@ -60,8 +50,14 @@ public class Stock {
         return product;
     }
 
+
     public void setProduct(final Product product) {
         this.product = product;
     }
     //endregion
+
+
+
+
+
 }

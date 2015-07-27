@@ -1,7 +1,7 @@
 package domainapp.integtests.tests.modules.stock;
 
-import domainapp.dom.modules.store.stock.Product;
-import domainapp.dom.modules.store.stock.Products;
+import domainapp.dom.modules.stockpilemanagement.Product;
+import domainapp.dom.modules.stockpilemanagement.Products;
 import domainapp.fixture.modules.StoreFixtureScript;
 import domainapp.integtests.tests.SimpleAppIntegTest;
 import org.apache.isis.applib.DomainObjectContainer;

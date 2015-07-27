@@ -22,8 +22,7 @@ public class ProductTest {
                     .exercise(product);
 
 
-            product.setCostPrice(BigDecimal.ONE);
-            product.setSellingPrice(BigDecimal.TEN);
+
 
 
 
@@ -32,9 +31,6 @@ public class ProductTest {
 
 
             assert product != null: "product null";
-            assert product.getCostPrice().equals(BigDecimal.ONE): "cost price incorrect";
-            assert product.getSellingPrice().equals(BigDecimal.TEN): "selling price incorrect";
-
 
 
         }

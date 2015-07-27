@@ -1,6 +1,7 @@
 package domainapp.fixture.modules;
 
-import domainapp.fixture.modules.store.ProductsFixture;
+import domainapp.fixture.modules.stockpilemanagement.ProductsFixture;
+import domainapp.fixture.modules.stockpilemanagement.StockFixture;
 import org.apache.isis.applib.fixturescripts.FixtureScript;
 
 /**
@@ -16,6 +17,7 @@ public class StoreFixtureScript extends FixtureScript {
     protected void execute(ExecutionContext executionContext) {
 
         executionContext.executeChild(this, new ProductsFixture());
+        executionContext.executeChild(this, new StockFixture());
 
 
     }
