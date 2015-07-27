@@ -60,34 +60,7 @@ public class Product{
     }
 
 
-    //region > costPrice (property)
-    private BigDecimal costPrice;
 
-    @MemberOrder(sequence = "4")
-    @Column(allowsNull = "false")
-    public BigDecimal getCostPrice() {
-        return costPrice;
-    }
-
-    public void setCostPrice(final BigDecimal costPrice) {
-        this.costPrice = costPrice;
-    }
-    //endregion
-
-
-    //region > sellingPrice (property)
-    private BigDecimal sellingPrice;
-
-    @MemberOrder(sequence = "5")
-    @Column(allowsNull = "false")
-    public BigDecimal getSellingPrice() {
-        return sellingPrice;
-    }
-
-    public void setSellingPrice(final BigDecimal sellingPrice) {
-        this.sellingPrice = sellingPrice;
-    }
-    //endregion
 
 
 

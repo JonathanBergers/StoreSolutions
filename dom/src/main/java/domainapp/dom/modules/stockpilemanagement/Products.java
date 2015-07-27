@@ -12,7 +12,7 @@ import java.util.List;
  */
 
 @DomainService(repositoryFor = Product.class, nature = NatureOfService.DOMAIN)
-public class Products {
+public class Products implements ProductsInterface{
 
 
 
@@ -39,13 +39,11 @@ public class Products {
 
     //region > createProduct (action)
     @Programmatic
-    public Product createProduct(final String title, final String description, final BigDecimal costPrice, final BigDecimal sellingPrice) {
+    public Product createProduct(final String title, final String description) {
 
         Product p = container.newTransientInstance(Product.class);
         p.setTitle(title);
         p.setDescription(description);
-        p.setCostPrice(costPrice);
-        p.setSellingPrice(sellingPrice);
 
         container.persist(p);
         return p;

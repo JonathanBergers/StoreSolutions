@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * Created by jonathan on 26-7-15.
+ * Created by jonathan on 28-7-15.
  */
-public interface ProductRepoInterface<T extends Product> {
+public interface ProductsInterface<T extends Product> {
 
 
     public List<T> listAll();
@@ -14,7 +14,6 @@ public interface ProductRepoInterface<T extends Product> {
     public List<T> findByTitle(final String title);
 
     public List<T> findByDescriptionContains(final String text);
-
 
 
 }

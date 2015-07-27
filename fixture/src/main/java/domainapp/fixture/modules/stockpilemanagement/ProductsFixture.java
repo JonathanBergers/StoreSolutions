@@ -33,7 +33,7 @@ public class ProductsFixture extends FixtureScript{
             BigDecimal costPrice = BigDecimal.valueOf(5);
             BigDecimal sellingPrice = BigDecimal.valueOf(10);
 
-            Product p = products.createProduct(s, PRODUCT_DESCRIPTION + s, costPrice, sellingPrice);
+            Product p = products.createProduct(s, PRODUCT_DESCRIPTION + s);
           executionContext.addResult(this, p);
         }
 

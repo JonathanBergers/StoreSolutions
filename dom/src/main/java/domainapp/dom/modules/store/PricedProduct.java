@@ -22,7 +22,7 @@ public class PricedProduct extends Product {
 
 
 
-    @MemberOrder(sequence = "2")
+    @MemberOrder(sequence = "4")
     @Column(allowsNull = "false")
     public BigDecimal getSellingPrice() {
         return sellingPrice;
@@ -40,7 +40,7 @@ public class PricedProduct extends Product {
     //region > costPrice (property)
     private BigDecimal costPrice;
 
-    @MemberOrder(sequence = "2")
+    @MemberOrder(sequence = "5")
     @Column(allowsNull = "false")
     public BigDecimal getCostPrice() {
         return costPrice;

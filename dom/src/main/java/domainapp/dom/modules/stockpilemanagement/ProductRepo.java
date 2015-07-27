@@ -20,12 +20,12 @@ public class ProductRepo implements ProductRepoInterface<Product> {
     }
 
     @Override
-    public List<Product> findByTitle(String title) {
+    public List<Product> findByTitle(final String title) {
         return products.findByTitle(title);
     }
 
     @Override
-    public List<Product> findByDescriptionContains(String text) {
+    public List<Product> findByDescriptionContains(final String text) {
         return products.findByDescriptionContains(text);
     }
 
