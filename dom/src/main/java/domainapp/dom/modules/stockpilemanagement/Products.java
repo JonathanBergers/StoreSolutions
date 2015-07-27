@@ -4,6 +4,7 @@ import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.*;
 
 import javax.inject.Inject;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -38,11 +39,14 @@ public class Products {
 
     //region > createProduct (action)
     @Programmatic
-    public Product createProduct(final String title, final String description) {
+    public Product createProduct(final String title, final String description, final BigDecimal costPrice, final BigDecimal sellingPrice) {
 
         Product p = container.newTransientInstance(Product.class);
         p.setTitle(title);
         p.setDescription(description);
+        p.setCostPrice(costPrice);
+        p.setSellingPrice(sellingPrice);
+
         container.persist(p);
         return p;
     }

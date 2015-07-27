@@ -1,9 +1,11 @@
 package domainapp.fixture.modules.stockpilemanagement;
 
+import domainapp.dom.modules.stockpilemanagement.Product;
 import domainapp.dom.modules.stockpilemanagement.Products;
 import org.apache.isis.applib.fixturescripts.FixtureScript;
 
 import javax.inject.Inject;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -28,7 +30,11 @@ public class ProductsFixture extends FixtureScript{
         for(String s: NAMES){
 
 
-          executionContext.addResult(this, products.createProduct(s, PRODUCT_DESCRIPTION + s ));
+            BigDecimal costPrice = BigDecimal.valueOf(5);
+            BigDecimal sellingPrice = BigDecimal.valueOf(10);
+
+            Product p = products.createProduct(s, PRODUCT_DESCRIPTION + s, costPrice, sellingPrice);
+          executionContext.addResult(this, p);
         }
 
 
