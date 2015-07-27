@@ -4,7 +4,6 @@ import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.*;
 
 import javax.inject.Inject;
-import java.math.BigDecimal;
 import java.util.List;
 
 /**

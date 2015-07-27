@@ -25,6 +25,8 @@ public class PricedProductRepo extends ProductRepo{
         return container.allMatches(PricedProduct.class, Predicates.PricedProductPredicate.thoseWithCostPrice(costPrice));
     }
 
+    
+
     @Inject
     DomainObjectContainer container;
 }
