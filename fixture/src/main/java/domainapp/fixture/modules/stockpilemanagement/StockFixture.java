@@ -17,16 +17,23 @@ public class StockFixture extends FixtureScript {
 
 
 
+
     @Override
     protected void execute(ExecutionContext executionContext) {
 
 
+
+
         List<Product> productlist = products.listAll();
 
+        assert productlist.size() ==10: "size = " + productlist.size();
+
+
+        int amount = 0;
         for(Product p: productlist){
 
-            int amount = 6 +  (int) (Math.random() * 15);
-            stocks.createStock(p, amount);
+            amount ++;
+           executionContext.addResult(this, stocks.createStock(p, amount));
         }
 
 

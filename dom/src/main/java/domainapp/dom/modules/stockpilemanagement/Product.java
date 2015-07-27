@@ -23,6 +23,7 @@ import javax.jdo.annotations.*;
 @Version(
         strategy = VersionStrategy.VERSION_NUMBER,
         column = "version")
+@Unique(name = "title")
 @DomainObject(editing = Editing.DISABLED)
 public class Product{
 

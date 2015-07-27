@@ -13,19 +13,22 @@ import java.util.List;
  */
 public class ProductsFixture extends FixtureScript{
 
-    public final List<String> NAMES = Collections.unmodifiableList(Arrays.asList(
+    public static final List<String> NAMES = Collections.unmodifiableList(Arrays.asList(
             "Appel", "Roos", "Mes", "Kaas", "Lepel", "Ketting", "Armband", "Pot", "Koek", "Hoed"));
 
 
+    public static final String PRODUCT_DESCRIPTION = "Dit is een mooie ";
 
     @Override
     protected void execute(ExecutionContext executionContext) {
 
 
+        assert products.listAll().isEmpty();
+
         for(String s: NAMES){
 
 
-           products.createProduct(s, "dit is een mooie " + s );
+          executionContext.addResult(this, products.createProduct(s, PRODUCT_DESCRIPTION + s ));
         }
 
 

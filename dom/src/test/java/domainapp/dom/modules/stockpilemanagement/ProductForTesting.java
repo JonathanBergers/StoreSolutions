@@ -1,4 +1,4 @@
-package domainapp.dom.modules.store.stock;
+package domainapp.dom.modules.stockpilemanagement;
 
 import domainapp.dom.modules.stockpilemanagement.Product;
 

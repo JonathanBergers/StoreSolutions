@@ -48,9 +48,21 @@ public class Products {
     }
     //endregion
 
+    @Programmatic
+    public void removeProduct(Product product){
+
+        List<Stock> stocksWithProduct = stocks.findByProduct(product);
+        for(Stock s: stocksWithProduct){
+            stocks.removeStock(s);
+        }
+        container.removeIfNotAlready(product);
+
+    }
 
 
 
+    @Inject
+    Stocks stocks;
 
     @Inject
     DomainObjectContainer container;

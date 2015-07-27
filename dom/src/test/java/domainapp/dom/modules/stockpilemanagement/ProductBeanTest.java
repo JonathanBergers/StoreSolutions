@@ -1,14 +1,12 @@
-package domainapp.dom.modules.store.stock;
+package domainapp.dom.modules.stockpilemanagement;
 
 import domainapp.dom.modules.AbstractBeanPropertiesTest;
 import org.junit.Test;
 
-import java.math.BigDecimal;
-
 /**
  * Created by jonathan on 23-7-15.
  */
-public class ProductTest {
+public class ProductBeanTest {
 
 
 
@@ -21,16 +19,6 @@ public class ProductTest {
             newPojoTester()
                     .exercise(product);
 
-
-
-
-
-
-
-
-
-
-            assert product != null: "product null";
 
 
         }

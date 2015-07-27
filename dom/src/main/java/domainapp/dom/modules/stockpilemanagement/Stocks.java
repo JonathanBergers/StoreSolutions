@@ -7,6 +7,7 @@ import org.apache.isis.applib.annotation.NatureOfService;
 import org.apache.isis.applib.annotation.Programmatic;
 
 import javax.inject.Inject;
+import javax.jdo.annotations.NotPersistent;
 import java.util.List;
 
 /**
@@ -67,6 +68,12 @@ public class Stocks {
     //endregion
 
 
+    //region > removeStock (action)
+    @Programmatic
+    public void removeStock(final Stock stock) {
+        container.removeIfNotAlready(stock);
+    }
+    //endregion
 
     @Inject
     DomainObjectContainer container;
