@@ -1,7 +1,7 @@
 package domainapp.fixture.modules.stockpilemanagement;
 
-import domainapp.dom.modules.stockpilemanagement.Product;
-import domainapp.dom.modules.stockpilemanagement.Products;
+import domainapp.dom.modules.stockpilemanagement.product.Product;
+import domainapp.dom.modules.stockpilemanagement.product.Products;
 import org.apache.isis.applib.fixturescripts.FixtureScript;
 
 import javax.inject.Inject;

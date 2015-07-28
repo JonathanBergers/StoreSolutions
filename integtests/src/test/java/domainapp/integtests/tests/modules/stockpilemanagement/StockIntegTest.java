@@ -1,15 +1,14 @@
 package domainapp.integtests.tests.modules.stockpilemanagement;
 
 
-import domainapp.dom.modules.stockpilemanagement.Product;
-import domainapp.dom.modules.stockpilemanagement.Products;
-import domainapp.dom.modules.stockpilemanagement.Stock;
-import domainapp.dom.modules.stockpilemanagement.Stocks;
+import domainapp.dom.modules.stockpilemanagement.product.Product;
+import domainapp.dom.modules.stockpilemanagement.product.Products;
+import domainapp.dom.modules.stockpilemanagement.stock.Stock;
+import domainapp.dom.modules.stockpilemanagement.stock.Stocks;
 import domainapp.fixture.modules.TeardownFixture;
 import domainapp.fixture.modules.stockpilemanagement.ProductsFixture;
 import domainapp.fixture.modules.stockpilemanagement.StockFixture;
 import domainapp.integtests.tests.SimpleAppIntegTest;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;

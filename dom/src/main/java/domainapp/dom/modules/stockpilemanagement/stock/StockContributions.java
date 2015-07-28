@@ -1,9 +1,8 @@
-package domainapp.dom.modules.stockpilemanagement;
+package domainapp.dom.modules.stockpilemanagement.stock;
 
 import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.Action;
 import org.apache.isis.applib.annotation.DomainService;
-import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.NatureOfService;
 
 import javax.inject.Inject;

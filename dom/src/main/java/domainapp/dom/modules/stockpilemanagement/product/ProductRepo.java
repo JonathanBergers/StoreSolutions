@@ -1,4 +1,4 @@
-package domainapp.dom.modules.stockpilemanagement;
+package domainapp.dom.modules.stockpilemanagement.product;
 
 import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.DomainService;

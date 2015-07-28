@@ -44,7 +44,7 @@ public class SimpleObjects {
     }
     //endregion
 
-    //region > listAll (action)
+    //region > listAllText (action)
     @Action(
             semantics = SemanticsOf.SAFE
     )

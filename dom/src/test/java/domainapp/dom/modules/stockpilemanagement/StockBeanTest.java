@@ -1,6 +1,8 @@
 package domainapp.dom.modules.stockpilemanagement;
 
 import domainapp.dom.modules.AbstractBeanPropertiesTest;
+import domainapp.dom.modules.stockpilemanagement.product.Product;
+import domainapp.dom.modules.stockpilemanagement.stock.Stock;
 import org.junit.Test;
 
 /**

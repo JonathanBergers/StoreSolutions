@@ -1,14 +1,11 @@
 package domainapp.integtests.tests.modules.stockpilemanagement;
 
-import domainapp.dom.modules.stockpilemanagement.Product;
-import domainapp.dom.modules.stockpilemanagement.Products;
-import domainapp.dom.modules.stockpilemanagement.Stock;
-import domainapp.dom.modules.stockpilemanagement.Stocks;
+import domainapp.dom.modules.stockpilemanagement.product.Product;
+import domainapp.dom.modules.stockpilemanagement.product.Products;
+import domainapp.dom.modules.stockpilemanagement.stock.Stocks;
 import domainapp.fixture.modules.TeardownFixture;
 import domainapp.fixture.modules.stockpilemanagement.ProductsFixture;
 import domainapp.integtests.tests.SimpleAppIntegTest;
-import org.apache.isis.applib.fixturescripts.FixtureScript;
-import org.apache.isis.applib.fixturescripts.FixtureScripts;
 import org.junit.*;
 
 import javax.inject.Inject;

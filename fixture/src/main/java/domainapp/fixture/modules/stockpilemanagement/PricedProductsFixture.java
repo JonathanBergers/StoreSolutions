@@ -1,9 +1,7 @@
 package domainapp.fixture.modules.stockpilemanagement;
 
-import domainapp.dom.modules.stockpilemanagement.Product;
 import domainapp.dom.modules.store.PricedProduct;
 import domainapp.dom.modules.store.PricedProducts;
-import org.apache.isis.applib.fixturescripts.FixtureScript;
 
 import javax.inject.Inject;
 import java.math.BigDecimal;

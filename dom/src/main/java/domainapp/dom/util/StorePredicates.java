@@ -1,8 +1,10 @@
-package domainapp.dom.modules.stockpilemanagement;
+package domainapp.dom.util;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
-import domainapp.dom.modules.stockpilemanagement.Product;
+import domainapp.dom.modules.stockpilemanagement.product.Product;
+import domainapp.dom.modules.stockpilemanagement.product.element.ProductElement;
+import domainapp.dom.modules.stockpilemanagement.stock.Stock;
 import domainapp.dom.modules.store.PricedProduct;
 
 import java.math.BigDecimal;
@@ -10,7 +12,7 @@ import java.math.BigDecimal;
 /**
  * Created by jonathan on 25-7-15.
  */
-public class Predicates {
+public class StorePredicates {
 
 
     public static class ProductPredicate {
@@ -108,8 +110,7 @@ public class Predicates {
 
 
 
-    public static class StockPredicate{
-
+    public static class StockPredicate {
 
 
         public static Predicate<Stock> thoseWithAmount(final Integer amount) {
@@ -148,6 +149,31 @@ public class Predicates {
                 }
             };
         }
+
+    }
+    public static class ProductElementPredicates{
+
+
+        public static Predicate<ProductElement> thoseWithType(final String type) {
+            return new Predicate<ProductElement>() {
+                @Override
+                public boolean apply(final ProductElement productElement) {
+                    return productElement.getType().toLowerCase().equals(type.toLowerCase());
+                }
+            };
+        }
+        public static Predicate<ProductElement> thoseWithTypeContains(final String type) {
+            return new Predicate<ProductElement>() {
+                @Override
+                public boolean apply(final ProductElement productElement) {
+                    return productElement.getType().toLowerCase().contains(type.toLowerCase());
+                }
+            };
+        }
+
+
+    }
+
 
 
 
@@ -198,4 +224,4 @@ public class Predicates {
 
 
 
-}
+

@@ -1,5 +1,8 @@
-package domainapp.dom.modules.stockpilemanagement;
+package domainapp.dom.modules.stockpilemanagement.product;
 
+import domainapp.dom.modules.stockpilemanagement.stock.Stock;
+import domainapp.dom.modules.stockpilemanagement.stock.Stocks;
+import domainapp.dom.util.StorePredicates;
 import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.*;
 
@@ -22,17 +25,19 @@ public class Products implements ProductsInterface{
     }
 
 
+
+
     @Programmatic
     public List<Product> findByTitle(String title){
 
-        return container.allMatches(Product.class, Predicates.ProductPredicate.thoseWithTitle(title));
+        return container.allMatches(Product.class, StorePredicates.ProductPredicate.thoseWithTitle(title));
 
     }
 
     @Programmatic
     public List<Product> findByDescriptionContains(String text){
 
-        return container.allMatches(Product.class, Predicates.ProductPredicate.thoseWithDescriptionContains(text));
+        return container.allMatches(Product.class, StorePredicates.ProductPredicate.thoseWithDescriptionContains(text));
 
     }
 

@@ -1,13 +1,13 @@
-package domainapp.dom.modules.stockpilemanagement;
+package domainapp.dom.modules.stockpilemanagement.stock;
 
+import domainapp.dom.modules.stockpilemanagement.product.Product;
+import domainapp.dom.util.StorePredicates;
 import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.DomainService;
-import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.NatureOfService;
 import org.apache.isis.applib.annotation.Programmatic;
 
 import javax.inject.Inject;
-import javax.jdo.annotations.NotPersistent;
 import java.util.List;
 
 /**
@@ -30,7 +30,7 @@ public class Stocks {
     //endregion
 
 
-    //region > listAll (action)
+    //region > listAllText (action)
     @Programmatic
     public List<Stock> listAll() {
         return container.allInstances(Stock.class);
@@ -40,7 +40,7 @@ public class Stocks {
     //region > findByProduct (action)
     @Programmatic
     public List<Stock> findByProduct(final Product product) {
-        return container.allMatches(Stock.class, Predicates.StockPredicate.thoseWithProduct(product));
+        return container.allMatches(Stock.class, StorePredicates.StockPredicate.thoseWithProduct(product));
     }
     //endregion
 
@@ -48,14 +48,14 @@ public class Stocks {
     //region > findByAmount (action)
     @Programmatic
     public List<Stock> findByAmount(final Integer amount) {
-        return container.allMatches(Stock.class, Predicates.StockPredicate.thoseWithAmount(amount));
+        return container.allMatches(Stock.class, StorePredicates.StockPredicate.thoseWithAmount(amount));
     }
     //endregion
 
     //region > findByAmountLessThan (action)
     @Programmatic
     public List<Stock> findByAmountLessThan(final Integer amount) {
-        return container.allMatches(Stock.class, Predicates.StockPredicate.thoseWithAmountLessThan(amount));
+        return container.allMatches(Stock.class, StorePredicates.StockPredicate.thoseWithAmountLessThan(amount));
     }
     //endregion
 
@@ -63,7 +63,7 @@ public class Stocks {
     //region > findByAmountLessThan (action)
     @Programmatic
     public List<Stock> findByAmountMoreThan(final Integer amount) {
-        return container.allMatches(Stock.class, Predicates.StockPredicate.thoseWithAmountMoreThan(amount));
+        return container.allMatches(Stock.class, StorePredicates.StockPredicate.thoseWithAmountMoreThan(amount));
     }
     //endregion
 

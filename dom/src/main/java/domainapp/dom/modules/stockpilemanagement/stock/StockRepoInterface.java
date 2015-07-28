@@ -1,6 +1,8 @@
-package domainapp.dom.modules.stockpilemanagement;
+package domainapp.dom.modules.stockpilemanagement.stock;
 
 
+
+import domainapp.dom.modules.stockpilemanagement.product.Product;
 
 import java.util.List;
 

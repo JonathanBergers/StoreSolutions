@@ -1,6 +1,6 @@
 package domainapp.dom.modules.store;
 
-import domainapp.dom.modules.stockpilemanagement.Product;
+import domainapp.dom.modules.stockpilemanagement.product.Product;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.MemberOrder;
 

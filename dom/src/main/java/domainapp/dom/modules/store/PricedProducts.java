@@ -1,11 +1,11 @@
 package domainapp.dom.modules.store;
 
-import domainapp.dom.modules.stockpilemanagement.Predicates;
-import domainapp.dom.modules.stockpilemanagement.Product;
-import domainapp.dom.modules.stockpilemanagement.Products;
+import com.google.common.base.Predicates;
+import domainapp.dom.util.StorePredicates;
+import domainapp.dom.modules.stockpilemanagement.product.Products;
 import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.DomainService;
-import org.apache.isis.applib.annotation.MemberOrder;
+import org.apache.isis.applib.annotation.NatureOfService;
 import org.apache.isis.applib.annotation.Programmatic;
 
 import javax.inject.Inject;
@@ -15,8 +15,8 @@ import java.util.List;
 /**
  * Created by jonathan on 28-7-15.
  */
-@DomainService
-public class PricedProducts extends Products{
+@DomainService(nature = NatureOfService.DOMAIN)
+public class PricedProducts extends Products implements PricedProductsInterface<PricedProduct>{
 
 
     //region > createProduct (action)
@@ -39,7 +39,38 @@ public class PricedProducts extends Products{
     @Programmatic
     public List<PricedProduct> findByCostPrice(final BigDecimal costPrice){
 
-        return container.allMatches(PricedProduct.class, Predicates.PricedProductPredicate.thoseWithCostPrice(costPrice));
+        return container.allMatches(PricedProduct.class, StorePredicates.PricedProductPredicate.thoseWithCostPrice(costPrice));
+    }
+
+    @Programmatic
+    public List<PricedProduct> findBySellingPrice(BigDecimal sellingPrice) {
+        return container.allMatches(PricedProduct.class, StorePredicates.PricedProductPredicate.thoseWithSellingPrice(sellingPrice));
+    }
+
+    @Programmatic
+    public List<PricedProduct> findByCostPriceLowerThan(BigDecimal costPrice) {
+        return container.allMatches(PricedProduct.class, StorePredicates.PricedProductPredicate.thoseWithCostLowerThan(costPrice));
+    }
+
+    @Programmatic
+    public List<PricedProduct> findByCostPriceHigherThan(BigDecimal costPrice) {
+        return container.allMatches(PricedProduct.class, StorePredicates.PricedProductPredicate.thoseWithCostHigherThan(costPrice));
+    }
+
+    @Programmatic
+    public List<PricedProduct> findBySellingPriceLowerThan(BigDecimal sellingPrice) {
+        return container.allMatches(PricedProduct.class, StorePredicates.PricedProductPredicate.thoseWithSellingPriceLowerThan(sellingPrice));
+    }
+
+    @Programmatic
+    public List<PricedProduct> findBySellingPriceHigherThan(BigDecimal sellingPrice) {
+        return container.allMatches(PricedProduct.class, StorePredicates.PricedProductPredicate.thoseWithSellingPriceHigherThan(sellingPrice));
+    }
+
+    @Programmatic
+    public List<PricedProduct> findBySellingPriceBetween(BigDecimal minPrice, BigDecimal maxPrice) {
+        return container.allMatches(PricedProduct.class, Predicates.and(StorePredicates.PricedProductPredicate.thoseWithSellingPriceHigherThan(minPrice),
+                StorePredicates.PricedProductPredicate.thoseWithSellingPriceLowerThan(maxPrice)));
     }
 
     @Inject

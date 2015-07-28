@@ -1,12 +1,11 @@
-package domainapp.dom.modules.stockpilemanagement;
+package domainapp.dom.modules.stockpilemanagement.product;
 
+import domainapp.dom.modules.stockpilemanagement.stock.Stocks;
 import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.*;
 
 import javax.inject.Inject;
 import javax.jdo.annotations.*;
-import java.math.BigDecimal;
-import java.util.List;
 
 /**
  * Created by jonathan on 14-7-15.
