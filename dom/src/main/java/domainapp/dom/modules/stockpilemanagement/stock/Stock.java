@@ -4,6 +4,7 @@ import domainapp.dom.modules.stockpilemanagement.product.Product;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.Editing;
 import org.apache.isis.applib.annotation.MemberOrder;
+import org.apache.isis.applib.annotation.PropertyLayout;
 
 import javax.jdo.annotations.*;
 
@@ -24,11 +25,17 @@ import javax.jdo.annotations.*;
 @DomainObject(editing = Editing.DISABLED)
 public class Stock {
 
+
+    public String title(){
+        return "Voorraad: " + getProduct().title() + " " + amount;
+    }
+
     //region > amount (property)
     private Integer amount;
 
     @MemberOrder(sequence = "1")
     @Column(allowsNull = "false")
+    @PropertyLayout(named = "Hoeveelheid")
     public Integer getAmount() {
         return amount;
     }

@@ -1,11 +1,16 @@
 package domainapp.dom.modules.store;
 
 import domainapp.dom.modules.stockpilemanagement.product.Product;
-import org.apache.isis.applib.annotation.DomainObject;
-import org.apache.isis.applib.annotation.MemberOrder;
+import org.apache.isis.applib.DomainObjectContainer;
+import org.apache.isis.applib.annotation.*;
+import org.apache.isis.applib.value.Blob;
+import org.apache.isis.applib.value.Image;
+import org.apache.isis.applib.value.Money;
 
+import javax.inject.Inject;
 import javax.jdo.annotations.*;
 import java.math.BigDecimal;
+
 
 /**
  * Created by jonathan on 26-7-15.
@@ -17,6 +22,8 @@ import java.math.BigDecimal;
 public class PricedProduct extends Product {
 
 
+
+
     //region > sellingPrice (property)
     private BigDecimal sellingPrice;
 
@@ -24,6 +31,7 @@ public class PricedProduct extends Product {
 
     @MemberOrder(sequence = "4")
     @Column(allowsNull = "false")
+    @PropertyLayout(named = "Verkoopprijs")
     public BigDecimal getSellingPrice() {
         return sellingPrice;
     }
@@ -42,6 +50,7 @@ public class PricedProduct extends Product {
 
     @MemberOrder(sequence = "5")
     @Column(allowsNull = "false")
+    @PropertyLayout(named = "Inkoopprijs")
     public BigDecimal getCostPrice() {
         return costPrice;
     }
@@ -51,5 +60,37 @@ public class PricedProduct extends Product {
     }
     //endregion
 
+
+    //TODO foto
+
+    //region > image (property)
+    private Blob image;
+
+
+
+    @MemberOrder(sequence = "1", name = "Foto")
+    @Column(allowsNull = "true")
+    @Property(optionality = Optionality.OPTIONAL)
+    public Blob getImage() {
+        return image;
+    }
+
+    public void setImage(final Blob image) {
+        this.image = image;
+    }
+
+    //region > addImage (action)
+    @MemberOrder(sequence = "2", name = "Foto")
+    @Action
+    public PricedProduct addImage(final Blob image) {
+        setImage(image);
+        return this;
+    }
+    //endregion
+
+
+
+    @Inject
+    DomainObjectContainer container;
 
 }

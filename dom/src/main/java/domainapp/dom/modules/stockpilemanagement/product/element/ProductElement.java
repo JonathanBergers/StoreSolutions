@@ -1,9 +1,7 @@
 package domainapp.dom.modules.stockpilemanagement.product.element;
 
 import domainapp.dom.modules.stockpilemanagement.product.Product;
-import org.apache.isis.applib.annotation.DomainObject;
-import org.apache.isis.applib.annotation.Editing;
-import org.apache.isis.applib.annotation.MemberOrder;
+import org.apache.isis.applib.annotation.*;
 
 import javax.jdo.annotations.*;
 
@@ -26,11 +24,13 @@ import javax.jdo.annotations.*;
 public abstract class ProductElement {
 
 
+
     //region > type (property)
     private String type;
 
     @MemberOrder(sequence = "1")
     @Column(allowsNull = "false")
+    @ActionLayout(named = "Soort")
     public String getType() {
         return type;
     }
@@ -46,8 +46,9 @@ public abstract class ProductElement {
     //region > displayValue (property)
     private String displayValue;
 
-    @MemberOrder(sequence = "1")
+    @MemberOrder(sequence = "2")
     @Column(allowsNull = "false")
+    @PropertyLayout(named = "Waarde")
     public String getDisplayValue() {
         return displayValue;
     }
@@ -62,6 +63,7 @@ public abstract class ProductElement {
 
     @MemberOrder(sequence = "1")
     @Column(allowsNull = "false")
+    @PropertyLayout(hidden = Where.ALL_TABLES, named = "Bijbehorend product")
     public Product getProduct() {
         return product;
     }

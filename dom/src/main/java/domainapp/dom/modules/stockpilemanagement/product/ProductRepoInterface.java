@@ -1,11 +1,14 @@
 package domainapp.dom.modules.stockpilemanagement.product;
 
+import org.apache.isis.applib.annotation.ActionLayout;
+
 import java.util.List;
 
 /**
  * Created by jonathan on 26-7-15.
  */
 public interface ProductRepoInterface<T extends Product> {
+
 
 
     public List<T> listAll();

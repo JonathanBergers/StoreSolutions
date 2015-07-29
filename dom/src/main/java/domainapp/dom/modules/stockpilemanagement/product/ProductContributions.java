@@ -1,9 +1,7 @@
 package domainapp.dom.modules.stockpilemanagement.product;
 
 import com.google.common.collect.Lists;
-import domainapp.dom.modules.stockpilemanagement.product.element.ProductElement;
-import domainapp.dom.modules.stockpilemanagement.product.element.ProductElementText;
-import domainapp.dom.modules.stockpilemanagement.product.element.ProductElements;
+import domainapp.dom.modules.stockpilemanagement.product.element.*;
 import domainapp.dom.modules.stockpilemanagement.stock.Stock;
 import domainapp.dom.modules.stockpilemanagement.stock.Stocks;
 import org.apache.isis.applib.DomainObjectContainer;
@@ -12,6 +10,7 @@ import org.apache.isis.applib.annotation.Collection;
 
 import javax.inject.Inject;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by jonathan on 27-7-15.
@@ -20,18 +19,22 @@ import java.util.*;
 public class ProductContributions {
 
 
+    public static final String ELEMENTS_GROUP = "Attributen";
+
     //region > remove (action)
     @Action
-    public void remove(Product product, final boolean sure) {
+    @ActionLayout(named = "Verwijder")
+    public void remove(Product product, @ParameterLayout(named = "Weet u het zeker?" )final boolean sure) {
         if(sure) {
         products.removeProduct(product);}
     }
     //endregion
 
 
-    @Action
-    @Collection(notPersisted = true)
-    @CollectionLayout(render =  RenderType.EAGERLY)
+    @MemberOrder(sequence = "1", name = "Stock")
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(contributed = Contributed.AS_ASSOCIATION, named = "Voorraad")
+    @CollectionLayout(render = RenderType.EAGERLY)
     public List<Stock> collectStock(Product product){
         return stocks.findByProduct(product);
 
@@ -39,23 +42,84 @@ public class ProductContributions {
 
 
     //region > addElement (action)
-    @MemberOrder(sequence = "1")
-    @Action
-    public ProductElement addElementText(final Product product, final String type, final String value){
 
+    @MemberOrder(sequence = "1", name = ELEMENTS_GROUP)
+    @Action
+    @ActionLayout(named = "Nieuw text attribuut")
+    public ProductElement newTextElement(final Product product, @ParameterLayout(named = "Soort")final String type,
+                                         @ParameterLayout(named = "Waarde")final String value){
 
         return productElements.createProductElementText(product, type, value);
 
     }
 
+    //region > addElement (action)
+    @MemberOrder(sequence = "1", name = ELEMENTS_GROUP)
+    @Action
+    @ActionLayout(named = "Nieuw nummeriek attribuut")
+    public ProductElement newNumericElement(final Product product, @ParameterLayout(named = "Soort")final String type,
+                                            @ParameterLayout(named = "Waarde")final int value,
+                                            @ParameterLayout(named = "Eenheid")final ProductElementEntity entity){
 
-    public List<String> autoComplete1AddElementText(final String search) {
-        List<String> types = new ArrayList<>();
-        for(ProductElementText p: productElements.findTextByTypeContains(search)){
-            types.add(p.getType());
-        }
+        return productElements.createProductElementNumeric(product, type, entity, value);
+
+    }
+
+    //region > addElement (action)
+    @MemberOrder(sequence = "1", name = ELEMENTS_GROUP)
+    @Action
+    @ActionLayout(named = "Bestaand nummeriek attribuut")
+    public ProductElement addNumericElement(final Product product, @ParameterLayout(named = "Soort")final String type,
+                                            @ParameterLayout(named = "Waarde")final int value,
+                                            @ParameterLayout(named = "Eenheid")final ProductElementEntity entity){
+
+        return productElements.createProductElementNumeric(product, type, entity, value);
+
+    }
+
+
+    public SortedSet<String> choices1AddNumericElement() {
+        return getTypesFromElements(productElements.listAllNumeric());
+    }
+
+
+    //region > addElement (action)
+    @MemberOrder(sequence = "1", name = ELEMENTS_GROUP)
+    @Action
+    @ActionLayout(named = "Bestaand text attribuut")
+    public ProductElement addTextElement(final Product product, @ParameterLayout(named = "Soort")final String type,
+                                         @ParameterLayout(named = "Waarde")final String value){
+
+        return productElements.createProductElementText(product, type, value);
+
+    }
+
+    public SortedSet<String> choices1AddTextElement() {
+        return getTypesFromElements(productElements.listAllText());
+    }
+
+
+    private SortedSet<String> getTypesFromElements(List<? extends ProductElement> elements){
+
+        SortedSet<String> types = elements.stream().map(ProductElement::getType).collect(Collectors.toCollection(() -> new TreeSet<>()));
         return types;
     }
+
+
+    @MemberOrder(sequence = "1", name = ELEMENTS_GROUP)
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(contributed = Contributed.AS_ASSOCIATION)
+    @CollectionLayout(render = RenderType.EAGERLY, named = "Attributen")
+    public List<ProductElement> collectElements(Product product){
+        return productElements.findByProduct(product);
+    }
+
+
+
+
+
+
+
     //TODO, tags ??
 
 

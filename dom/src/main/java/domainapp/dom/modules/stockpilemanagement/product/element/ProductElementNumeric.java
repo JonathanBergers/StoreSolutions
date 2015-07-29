@@ -2,6 +2,7 @@ package domainapp.dom.modules.stockpilemanagement.product.element;
 
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.MemberOrder;
+import org.apache.isis.applib.annotation.PropertyLayout;
 
 import javax.jdo.annotations.*;
 
@@ -11,7 +12,7 @@ import javax.jdo.annotations.*;
 @PersistenceCapable(identityType = IdentityType.DATASTORE)
 @Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
 @DomainObject
-public class ProductElementNumber extends ProductElement {
+public class ProductElementNumeric extends ProductElement {
 
 
 
@@ -21,6 +22,7 @@ public class ProductElementNumber extends ProductElement {
     private int value;
 
     @Column(allowsNull = "false")
+    @PropertyLayout(named = "Nummerieke waarde")
     public int getValue() {
         return value;
     }
@@ -35,6 +37,7 @@ public class ProductElementNumber extends ProductElement {
 
 
     @Column(allowsNull = "false")
+    @PropertyLayout(named = "Eenheid")
     public ProductElementEntity getEntity() {
         return entity;
     }

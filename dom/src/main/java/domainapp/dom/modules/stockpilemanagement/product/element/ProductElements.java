@@ -28,9 +28,9 @@ public class ProductElements implements ProductElementsInterface {
     }
 
     @Programmatic
-    public ProductElementNumber createProductElementNumber(Product product, final String type, final ProductElementEntity entity, final int value) {
+    public ProductElementNumeric createProductElementNumeric(Product product, final String type, final ProductElementEntity entity, final int value) {
 
-        ProductElementNumber e = container.newTransientInstance(ProductElementNumber.class);
+        ProductElementNumeric e = container.newTransientInstance(ProductElementNumeric.class);
         e.setProduct(product);
         e.setType(type);
         e.setEntity(entity);
@@ -47,13 +47,33 @@ public class ProductElements implements ProductElementsInterface {
     }
 
     @Programmatic
-    public List<ProductElementText> findTextByType(String type) {
+    public List<ProductElementText> findByTypeText(String type) {
         return container.allMatches(ProductElementText.class, StorePredicates.ProductElementPredicates.thoseWithType(type));
     }
 
     @Programmatic
-    public List<ProductElementText> findTextByTypeContains(String type) {
+    public List<ProductElementText> findByTypeContainsText(String type) {
         return container.allMatches(ProductElementText.class, StorePredicates.ProductElementPredicates.thoseWithTypeContains(type));
+    }
+
+    @Programmatic
+    public List<ProductElement> findByProduct(Product product) {
+        return container.allMatches(ProductElement.class, StorePredicates.ProductElementPredicates.thoseWithProduct(product));
+    }
+
+    @Programmatic
+    public List<ProductElement> listAll() {
+        return container.allInstances(ProductElement.class);
+    }
+
+    @Programmatic
+    public List<ProductElement> findByType(String type) {
+        return container.allMatches(ProductElement.class, StorePredicates.ProductElementPredicates.thoseWithType(type));
+    }
+
+    @Programmatic
+    public List<ProductElementNumeric> listAllNumeric() {
+        return container.allInstances(ProductElementNumeric.class);
     }
 
 

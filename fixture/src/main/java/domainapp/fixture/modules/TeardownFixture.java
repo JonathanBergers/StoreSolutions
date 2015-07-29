@@ -14,7 +14,8 @@ public class TeardownFixture extends FixtureScript {
     @Override
     protected void execute(ExecutionContext executionContext) {
         isisJdoSupport.executeUpdate("delete from \"Stock\"");
-
+        isisJdoSupport.executeUpdate("delete from \"PricedProduct\"");
         isisJdoSupport.executeUpdate("delete from \"Product\"");
+        isisJdoSupport.executeUpdate("delete from \"ProductElement\"");
     }
 }

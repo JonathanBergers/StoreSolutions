@@ -8,6 +8,7 @@ import domainapp.dom.util.Titled;
 public enum  ProductElementEntity {
     M,
     KG,
+    GR
     ;
 
 

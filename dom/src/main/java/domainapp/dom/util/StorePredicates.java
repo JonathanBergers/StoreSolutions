@@ -171,6 +171,15 @@ public class StorePredicates {
             };
         }
 
+        public static Predicate<ProductElement> thoseWithProduct(final Product product) {
+            return new Predicate<ProductElement>() {
+                @Override
+                public boolean apply(final ProductElement productElement) {
+                    return Objects.equal(productElement.getProduct(), product);
+                }
+            };
+        }
+
 
     }
 
