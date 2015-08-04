@@ -21,7 +21,7 @@ public class PricedProductsFixture extends ProductsFixture {
 
             assert products.listAll().isEmpty();
 
-            for(String s: NAMES){
+            for(String s: TITLES){
 
 
                 BigDecimal costPrice = BigDecimal.valueOf(5);

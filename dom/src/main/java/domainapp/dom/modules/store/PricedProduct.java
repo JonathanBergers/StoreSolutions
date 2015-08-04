@@ -1,6 +1,8 @@
 package domainapp.dom.modules.store;
 
 import domainapp.dom.modules.stockpilemanagement.product.Product;
+import domainapp.dom.modules.stockpilemanagement.product.element.ProductElement;
+import domainapp.dom.modules.stockpilemanagement.product.element.ProductElements;
 import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.value.Blob;
@@ -10,6 +12,7 @@ import org.apache.isis.applib.value.Money;
 import javax.inject.Inject;
 import javax.jdo.annotations.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 
 /**
@@ -29,7 +32,7 @@ public class PricedProduct extends Product {
 
 
 
-    @MemberOrder(sequence = "4")
+    @MemberOrder(sequence = "5")
     @Column(allowsNull = "false")
     @PropertyLayout(named = "Verkoopprijs")
     public BigDecimal getSellingPrice() {
@@ -48,7 +51,7 @@ public class PricedProduct extends Product {
     //region > costPrice (property)
     private BigDecimal costPrice;
 
-    @MemberOrder(sequence = "5")
+    @MemberOrder(sequence = "6")
     @Column(allowsNull = "false")
     @PropertyLayout(named = "Inkoopprijs")
     public BigDecimal getCostPrice() {
@@ -68,9 +71,15 @@ public class PricedProduct extends Product {
 
 
 
-    @MemberOrder(sequence = "1", name = "Foto")
-    @Column(allowsNull = "true")
-    @Property(optionality = Optionality.OPTIONAL)
+    @MemberOrder(sequence = "1")
+    @javax.jdo.annotations.Persistent(defaultFetchGroup="false", columns = {
+            @Column(name = "attachment_name"),
+            @Column(name = "attachment_mimetype"),
+            @Column(name = "attachment_bytes", jdbcType = "BLOB", sqlType = "BLOB")
+    })
+    @Property(
+            optionality = Optionality.OPTIONAL
+    )
     public Blob getImage() {
         return image;
     }
@@ -80,8 +89,9 @@ public class PricedProduct extends Product {
     }
 
     //region > addImage (action)
-    @MemberOrder(sequence = "2", name = "Foto")
+    @MemberOrder(sequence = "1", name = "General")
     @Action
+    @ActionLayout(named = "Voeg foto toe")
     public PricedProduct addImage(final Blob image) {
         setImage(image);
         return this;
@@ -90,7 +100,11 @@ public class PricedProduct extends Product {
 
 
 
+
+
     @Inject
     DomainObjectContainer container;
+
+
 
 }

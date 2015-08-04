@@ -12,7 +12,7 @@ import javax.jdo.annotations.*;
 @PersistenceCapable(identityType = IdentityType.DATASTORE)
 @Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
 @DomainObject
-public class ProductElementText extends ProductElement {
+public class ProductElementText extends ProductElement<ProductElementText> {
 
 
     //region > value (property)
@@ -26,6 +26,12 @@ public class ProductElementText extends ProductElement {
 
     public void setValue(final String value) {
         this.value = value;
+    }
+
+
+    @Override
+    public int compareTo(ProductElementText o) {
+        return getValue().toLowerCase().compareTo(o.getValue().toLowerCase());
     }
     //endregion
 

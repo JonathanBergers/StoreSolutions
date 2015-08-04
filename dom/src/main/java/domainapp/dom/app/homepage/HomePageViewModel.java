@@ -18,33 +18,78 @@
  */
 package domainapp.dom.app.homepage;
 
+import java.math.BigDecimal;
 import java.util.List;
 
-import org.apache.isis.applib.annotation.ViewModel;
+import domainapp.dom.modules.rozenkwekerij.Rose;
+import domainapp.dom.modules.rozenkwekerij.RoseStrain;
+import domainapp.dom.modules.rozenkwekerij.Roses;
+import domainapp.dom.modules.stockpilemanagement.product.Product;
+import domainapp.dom.modules.stockpilemanagement.product.Products;
+import domainapp.dom.modules.stockpilemanagement.stock.Stock;
+import domainapp.dom.modules.stockpilemanagement.stock.Stocks;
+import org.apache.isis.applib.DomainObjectContainer;
+import org.apache.isis.applib.annotation.*;
 
-import domainapp.dom.modules.simple.SimpleObject;
-import domainapp.dom.modules.simple.SimpleObjects;
+
+import javax.inject.Inject;
 
 @ViewModel
-public class HomePageViewModel {
+@ViewModelLayout(paged = 5)
+public class HomePageViewModel{
 
     //region > title
     public String title() {
-        return getObjects().size() + " objects";
+        return "Welkom " + container.getUser().getName();
     }
     //endregion
 
     //region > object (collection)
-    @org.apache.isis.applib.annotation.HomePage
-    public List<SimpleObject> getObjects() {
-        return simpleObjects.listAll();
+    @MemberOrder(name = "Producten", sequence = "1")
+    @CollectionLayout(render = RenderType.EAGERLY, named = "Producten")
+    public List<Product> getProducts(){
+
+        return products.listAll();
     }
     //endregion
 
-    //region > injected services
+    @MemberOrder(sequence = "2", name = "Producten")
+    @Action
+    @ActionLayout(named = "Voeg roos toe")
+    public Rose createRose(@ParameterLayout(named = "Soort")final RoseStrain strain,
+                           @ParameterLayout(named = "Titel")final String title,
+                           @ParameterLayout(named = "Beschrijving")final String description,
+                           @ParameterLayout(named = "Inkoopprijs")final BigDecimal costPrice,
+                           @ParameterLayout(named = "Verkoopprijs")final BigDecimal sellingPrice
+                           ) {
+        return roses.createRose(title, description, costPrice,sellingPrice, strain);
 
-    @javax.inject.Inject
-    SimpleObjects simpleObjects;
+    }
+
+
+
+
+    //region > object (collection)
+    @MemberOrder(name = "Voorraad", sequence = "1")
+    @CollectionLayout(render = RenderType.EAGERLY, named = "Voorraden")
+    public List<Stock> getStock(){
+
+        return stocks.listAll();
+    }
+    //endregion
+
+
+    @Inject
+    DomainObjectContainer container;
+
+    @Inject
+    Products products;
+
+    @Inject
+    Stocks stocks;
+
+    @Inject
+    Roses roses;
 
     //endregion
 }

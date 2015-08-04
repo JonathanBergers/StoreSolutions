@@ -1,6 +1,8 @@
 package domainapp.dom.modules.stockpilemanagement.product;
 
+import domainapp.dom.util.SearchTypes;
 import org.apache.isis.applib.annotation.ActionLayout;
+import org.apache.isis.applib.annotation.ParameterLayout;
 
 import java.util.List;
 
@@ -10,13 +12,12 @@ import java.util.List;
 public interface ProductRepoInterface<T extends Product> {
 
 
-
+    @ActionLayout(named = "Alle producten")
     public List<T> listAll();
 
-    public List<T> findByTitle(final String title);
 
-    public List<T> findByDescriptionContains(final String text);
-
+    public List<T> findByTitleOrDescription(final SearchTypes.Text type,
+                                            final String text);
 
 
 }

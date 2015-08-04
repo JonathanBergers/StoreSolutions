@@ -8,6 +8,7 @@ import domainapp.dom.modules.stockpilemanagement.stock.Stock;
 import domainapp.dom.modules.store.PricedProduct;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * Created by jonathan on 25-7-15.
@@ -36,6 +37,15 @@ public class StorePredicates {
             };
         }
 
+        public static Predicate<Product> thoseWithTitleContains(final String title) {
+            return new Predicate<Product>() {
+                @Override
+                public boolean apply(final Product product) {
+                    return product.getTitle().toLowerCase().contains(title.toLowerCase());
+                }
+            };
+        }
+
 
         public static Predicate<Product> thoseWithDescriptionContains(final String text) {
             return new Predicate<Product>() {
@@ -45,6 +55,25 @@ public class StorePredicates {
                 }
             };
         }
+
+        public static Predicate<Product> thoseWIthProductElement(final ProductElement productElement) {
+            return new Predicate<Product>() {
+                @Override
+                public boolean apply(final Product product) {
+                    return product.getElements().contains(productElement);
+                }
+            };
+        }
+
+        public static Predicate<Product> thoseWIthProductElements(final List<ProductElement> productElements) {
+            return new Predicate<Product>() {
+                @Override
+                public boolean apply(final Product product) {
+                    return product.getElements().containsAll(productElements);
+                }
+            };
+        }
+
 
     }
 
@@ -167,6 +196,14 @@ public class StorePredicates {
                 @Override
                 public boolean apply(final ProductElement productElement) {
                     return productElement.getType().toLowerCase().contains(type.toLowerCase());
+                }
+            };
+        }
+        public static Predicate<ProductElement> thoseWithTypeStartsWith(final String type) {
+            return new Predicate<ProductElement>() {
+                @Override
+                public boolean apply(final ProductElement productElement) {
+                    return productElement.getType().toLowerCase().startsWith(type.toLowerCase());
                 }
             };
         }

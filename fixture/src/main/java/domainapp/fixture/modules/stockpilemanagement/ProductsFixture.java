@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class ProductsFixture extends FixtureScript{
 
-    public static final List<String> NAMES = Collections.unmodifiableList(Arrays.asList(
+    public static final List<String> TITLES = Collections.unmodifiableList(Arrays.asList(
             "Appel", "Roos", "Mes", "Kaas", "Lepel", "Ketting", "Armband", "Pot", "Koek", "Hoed"));
 
 
@@ -27,7 +27,7 @@ public class ProductsFixture extends FixtureScript{
 
         assert products.listAll().isEmpty();
 
-        for(String s: NAMES){
+        for(String s: TITLES){
 
 
             BigDecimal costPrice = BigDecimal.valueOf(5);

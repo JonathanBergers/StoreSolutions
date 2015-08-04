@@ -16,6 +16,56 @@ public class ProductElements implements ProductElementsInterface {
 
 
     @Programmatic
+    public <T extends  ProductElement<T>> List<T> listAll(Class<T> childClass) {
+        return container.allInstances(childClass);
+    }
+
+    @Programmatic
+    public <T extends  ProductElement<T>> List<T> findByType(Class<T> childClass, String type) {
+        return container.allMatches(childClass, StorePredicates.ProductElementPredicates.thoseWithType(type));
+    }
+
+    @Programmatic
+    public <T extends  ProductElement<T>> List<T> findByTypeContains(Class<T> childClass, String type) {
+        return container.allMatches(childClass, StorePredicates.ProductElementPredicates.thoseWithTypeContains(type));
+    }
+
+    @Programmatic
+    public <T extends  ProductElement<T>> List<T> findByTypeStartswith(Class<T> childClass, String type) {
+        return container.allMatches(childClass, StorePredicates.ProductElementPredicates.thoseWithTypeStartsWith(type));
+    }
+
+    @Programmatic
+    public <T extends  ProductElement<T>> List<T> findByProduct(Class<T> childClass, Product product) {
+        return container.allMatches(childClass, StorePredicates.ProductElementPredicates.thoseWithProduct(product));
+    }
+
+    @Programmatic
+    public List<ProductElement> listAll() {
+       return container.allInstances(ProductElement.class);
+    }
+
+    @Programmatic
+    public List<ProductElement> findByType(String type) {
+        return container.allMatches(ProductElement.class, StorePredicates.ProductElementPredicates.thoseWithType(type));
+    }
+
+    @Programmatic
+    public List<ProductElement> findByTypeContains(String type) {
+        return container.allMatches(ProductElement.class, StorePredicates.ProductElementPredicates.thoseWithTypeContains(type));
+    }
+
+    @Programmatic
+    public List<ProductElement> findByTypeStartswith(String type) {
+        return container.allMatches(ProductElement.class, StorePredicates.ProductElementPredicates.thoseWithTypeStartsWith(type));
+    }
+
+    @Programmatic
+    public List<ProductElement> findByProduct(Product product) {
+        return container.allMatches(ProductElement.class, StorePredicates.ProductElementPredicates.thoseWithProduct(product));
+    }
+
+    @Programmatic
     public ProductElementText createProductElementText(Product product, final String type, final String value) {
         ProductElementText e = container.newTransientInstance(ProductElementText.class);
         e.setProduct(product);
@@ -41,41 +91,52 @@ public class ProductElements implements ProductElementsInterface {
         return e;
     }
 
-    @Programmatic
-    public List<ProductElementText> listAllText() {
-        return container.allInstances(ProductElementText.class);
-    }
 
-    @Programmatic
-    public List<ProductElementText> findByTypeText(String type) {
-        return container.allMatches(ProductElementText.class, StorePredicates.ProductElementPredicates.thoseWithType(type));
-    }
 
-    @Programmatic
-    public List<ProductElementText> findByTypeContainsText(String type) {
-        return container.allMatches(ProductElementText.class, StorePredicates.ProductElementPredicates.thoseWithTypeContains(type));
-    }
 
-    @Programmatic
-    public List<ProductElement> findByProduct(Product product) {
-        return container.allMatches(ProductElement.class, StorePredicates.ProductElementPredicates.thoseWithProduct(product));
-    }
 
-    @Programmatic
-    public List<ProductElement> listAll() {
-        return container.allInstances(ProductElement.class);
-    }
 
-    @Programmatic
-    public List<ProductElement> findByType(String type) {
-        return container.allMatches(ProductElement.class, StorePredicates.ProductElementPredicates.thoseWithType(type));
-    }
 
-    @Programmatic
-    public List<ProductElementNumeric> listAllNumeric() {
-        return container.allInstances(ProductElementNumeric.class);
-    }
 
+
+
+//    @Programmatic
+//    public List<ProductElementText> listAllText() {
+//        return container.allInstances(ProductElementText.class);
+//    }
+//
+//
+//    @Programmatic
+//    public List<ProductElement> findByProduct(Product product) {
+//        return container.allMatches(ProductElement.class, StorePredicates.ProductElementPredicates.thoseWithProduct(product));
+//    }
+//
+//    @Programmatic
+//    public List<ProductElement> listAll() {
+//        return container.allInstances(ProductElement.class);
+//    }
+//
+//    @Programmatic
+//    public List<ProductElement> findByType(String type) {
+//        return container.allMatches(ProductElement.class, StorePredicates.ProductElementPredicates.thoseWithType(type));
+//    }
+//
+//    @Programmatic
+//    public List<ProductElementNumeric> listAllNumeric() {
+//        return container.allInstances(ProductElementNumeric.class);
+//    }
+//
+//
+//    @Programmatic
+//    public List<? extends ProductElement> findByClassAndType(String type, Class<? extends ProductElement> claz) {
+//        return container.allMatches(claz, StorePredicates.ProductElementPredicates.thoseWithType(type));
+//    }
+//
+//    @Programmatic
+//    public List<? extends ProductElement> findByClassAndTypeContains(String type, Class<? extends ProductElement> claz) {
+//        return container.allMatches(claz, StorePredicates.ProductElementPredicates.thoseWithTypeContains(type));
+//    }
+//
 
     @Inject
     DomainObjectContainer container;

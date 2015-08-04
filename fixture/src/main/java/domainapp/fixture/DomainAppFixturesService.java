@@ -31,8 +31,6 @@ import org.apache.isis.applib.fixturescripts.FixtureResult;
 import org.apache.isis.applib.fixturescripts.FixtureScript;
 import org.apache.isis.applib.fixturescripts.FixtureScripts;
 
-import domainapp.fixture.scenarios.RecreateSimpleObjects;
-
 /**
  * Enables fixtures to be installed from the application.
  */

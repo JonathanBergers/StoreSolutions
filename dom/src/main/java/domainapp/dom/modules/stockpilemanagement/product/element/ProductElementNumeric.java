@@ -12,7 +12,7 @@ import javax.jdo.annotations.*;
 @PersistenceCapable(identityType = IdentityType.DATASTORE)
 @Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
 @DomainObject
-public class ProductElementNumeric extends ProductElement {
+public class ProductElementNumeric extends ProductElement<ProductElementNumeric> {
 
 
 
@@ -44,6 +44,12 @@ public class ProductElementNumeric extends ProductElement {
 
     public void setEntity(final ProductElementEntity entity) {
         this.entity = entity;
+    }
+
+    @Override
+    public int compareTo(ProductElementNumeric o) {
+        //TODO
+        return 0;
     }
 
 

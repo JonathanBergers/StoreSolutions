@@ -28,7 +28,7 @@ public class ProductsIntegTest  extends SimpleAppIntegTest {
 
     protected final String CREATE_TITLE = "IntegratieTestProduct";
     protected final String DESCRIPTION = ProductsFixture.PRODUCT_DESCRIPTION + CREATE_TITLE;
-    protected final String FIRST_PRODUCT_TITLE = ProductsFixture.NAMES.get(0);
+    protected final String FIRST_PRODUCT_TITLE = ProductsFixture.TITLES.get(0);
     protected final String FIRST_PRODUCT_DESCRIPTION = ProductsFixture.PRODUCT_DESCRIPTION + FIRST_PRODUCT_TITLE;
 
 

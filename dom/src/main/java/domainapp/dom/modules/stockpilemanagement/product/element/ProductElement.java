@@ -4,6 +4,7 @@ import domainapp.dom.modules.stockpilemanagement.product.Product;
 import org.apache.isis.applib.annotation.*;
 
 import javax.jdo.annotations.*;
+import java.util.Comparator;
 
 /**
  * Created by jonathan on 28-7-15.
@@ -21,7 +22,7 @@ import javax.jdo.annotations.*;
         column = "version")
 @Unique(name = "type")
 @DomainObject(editing = Editing.DISABLED)
-public abstract class ProductElement {
+public abstract class ProductElement<T extends ProductElement> implements Comparable<T>{
 
 
 
@@ -72,6 +73,8 @@ public abstract class ProductElement {
         this.product = product;
     }
     //endregion
+
+
 
 
 }

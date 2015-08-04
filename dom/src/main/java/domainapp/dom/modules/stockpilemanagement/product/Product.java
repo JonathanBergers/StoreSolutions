@@ -29,6 +29,9 @@ import java.util.List;
         column = "version")
 @Unique(name = "title")
 @DomainObject(editing = Editing.DISABLED)
+@DomainObjectLayout(bookmarking = BookmarkPolicy.AS_CHILD)
+@MemberGroupLayout(columnSpans = {4, 0, 0, 8},
+        left = {"Foto", "General"})
 public class Product{
 
 
@@ -40,7 +43,7 @@ public class Product{
     //region > title (property)
     private String title;
 
-    @MemberOrder(sequence = "1")
+    @MemberOrder(sequence = "2")
     @Column(allowsNull = "false")
     @PropertyLayout(named = "Titel")
     public String getTitle() {
@@ -55,7 +58,7 @@ public class Product{
     //region > description (property)
     private String description;
 
-    @MemberOrder(sequence = "2")
+    @MemberOrder(sequence = "3")
     @Column(allowsNull = "true")
     @ActionLayout(contributed = Contributed.AS_ASSOCIATION)
     @PropertyLayout(named = "Beschrijving")
@@ -68,6 +71,13 @@ public class Product{
     }
 
 
+
+
+
+    @Programmatic
+    public List<ProductElement> getElements() {
+        return productElements.findByProduct(this);
+    }
 
 
 

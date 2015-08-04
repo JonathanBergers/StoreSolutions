@@ -45,57 +45,61 @@ public class ProductContributions {
 
     @MemberOrder(sequence = "1", name = ELEMENTS_GROUP)
     @Action
-    @ActionLayout(named = "Nieuw text attribuut")
-    public ProductElement newTextElement(final Product product, @ParameterLayout(named = "Soort")final String type,
+    @ActionLayout(named = "Nieuw text attribuut", position = ActionLayout.Position.RIGHT)
+    public Product newTextElement(final Product product, @ParameterLayout(named = "Soort")final String type,
                                          @ParameterLayout(named = "Waarde")final String value){
 
-        return productElements.createProductElementText(product, type, value);
+        productElements.createProductElementText(product, type, value);
+        return product;
 
     }
 
     //region > addElement (action)
     @MemberOrder(sequence = "1", name = ELEMENTS_GROUP)
     @Action
-    @ActionLayout(named = "Nieuw nummeriek attribuut")
-    public ProductElement newNumericElement(final Product product, @ParameterLayout(named = "Soort")final String type,
+    @ActionLayout(named = "Nieuw nummeriek attribuut", position = ActionLayout.Position.PANEL_DROPDOWN)
+    public Product newNumericElement(final Product product, @ParameterLayout(named = "Soort")final String type,
                                             @ParameterLayout(named = "Waarde")final int value,
                                             @ParameterLayout(named = "Eenheid")final ProductElementEntity entity){
 
-        return productElements.createProductElementNumeric(product, type, entity, value);
+        productElements.createProductElementNumeric(product, type, entity, value);
+        return product;
 
     }
 
     //region > addElement (action)
     @MemberOrder(sequence = "1", name = ELEMENTS_GROUP)
     @Action
-    @ActionLayout(named = "Bestaand nummeriek attribuut")
-    public ProductElement addNumericElement(final Product product, @ParameterLayout(named = "Soort")final String type,
+    @ActionLayout(named = "Bestaand nummeriek attribuut", position = ActionLayout.Position.BELOW)
+    public Product addNumericElement(final Product product, @ParameterLayout(named = "Soort")final String type,
                                             @ParameterLayout(named = "Waarde")final int value,
                                             @ParameterLayout(named = "Eenheid")final ProductElementEntity entity){
 
-        return productElements.createProductElementNumeric(product, type, entity, value);
+       productElements.createProductElementNumeric(product, type, entity, value);
+        return product;
 
     }
 
 
     public SortedSet<String> choices1AddNumericElement() {
-        return getTypesFromElements(productElements.listAllNumeric());
+        return getTypesFromElements(productElements.listAll(ProductElementNumeric.class));
     }
 
 
     //region > addElement (action)
     @MemberOrder(sequence = "1", name = ELEMENTS_GROUP)
     @Action
-    @ActionLayout(named = "Bestaand text attribuut")
-    public ProductElement addTextElement(final Product product, @ParameterLayout(named = "Soort")final String type,
+    @ActionLayout(named = "Bestaand text attribuut", position = ActionLayout.Position.BELOW, describedAs = "Voeg een bestaand attribuut toe voor dit product")
+    public Product addTextElement(final Product product, @ParameterLayout(named = "Soort")final String type,
                                          @ParameterLayout(named = "Waarde")final String value){
 
-        return productElements.createProductElementText(product, type, value);
+        productElements.createProductElementText(product, type, value);
+        return product;
 
     }
 
     public SortedSet<String> choices1AddTextElement() {
-        return getTypesFromElements(productElements.listAllText());
+        return getTypesFromElements(productElements.listAll(ProductElementText.class));
     }
 
 
@@ -110,12 +114,21 @@ public class ProductContributions {
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(contributed = Contributed.AS_ASSOCIATION)
     @CollectionLayout(render = RenderType.EAGERLY, named = "Attributen")
-    public List<ProductElement> collectElements(Product product){
+    public List<ProductElement> getElements(Product product){
         return productElements.findByProduct(product);
     }
 
 
+    //region > createStock (action)
+    @MemberOrder(sequence = "2", name = "Voorraad")
+    @Action
+    @ActionLayout(named = "Vooraad toevoegen")
+    public Product createStock(Product product, @ParameterLayout(named = "Hoeveelheid")final Integer amount) {
 
+        stocks.createStock(product, amount);
+        return product;
+    }
+    //endregion
 
 
 

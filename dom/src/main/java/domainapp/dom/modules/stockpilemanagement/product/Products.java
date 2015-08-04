@@ -1,5 +1,7 @@
 package domainapp.dom.modules.stockpilemanagement.product;
 
+import com.google.common.base.Predicates;
+import domainapp.dom.modules.stockpilemanagement.product.element.ProductElement;
 import domainapp.dom.modules.stockpilemanagement.stock.Stock;
 import domainapp.dom.modules.stockpilemanagement.stock.Stocks;
 import domainapp.dom.util.StorePredicates;
@@ -7,7 +9,9 @@ import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.*;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Created by jonathan on 14-7-15.
@@ -40,6 +44,19 @@ public class Products implements ProductsInterface{
         return container.allMatches(Product.class, StorePredicates.ProductPredicate.thoseWithDescriptionContains(text));
 
     }
+
+    @Programmatic
+    public List<Product> findByProfileElements(List<ProductElement> productElements) {
+
+
+        return container.allMatches(Product.class, StorePredicates.ProductPredicate.thoseWIthProductElements(productElements));
+    }
+
+    @Override
+    public List<Product> findByTitleContains(String title) {
+        return container.allMatches(Product.class, StorePredicates.ProductPredicate.thoseWithTitleContains(title));
+    }
+
 
     //region > createProduct (action)
     @Programmatic

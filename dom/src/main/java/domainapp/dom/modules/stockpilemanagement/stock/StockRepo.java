@@ -1,8 +1,7 @@
 package domainapp.dom.modules.stockpilemanagement.stock;
 
 import domainapp.dom.modules.stockpilemanagement.product.Product;
-import org.apache.isis.applib.annotation.DomainService;
-import org.apache.isis.applib.annotation.NatureOfService;
+import org.apache.isis.applib.annotation.*;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -11,36 +10,50 @@ import java.util.List;
  * Created by jonathan on 27-7-15.
  */
 @DomainService(nature = NatureOfService.VIEW_MENU_ONLY)
-public class StockRepo implements StockRepoInterface{
+@DomainServiceLayout(named = "Voorraadbeheer", menuBar = DomainServiceLayout.MenuBar.PRIMARY)
+public class StockRepo{
 
 
 
+    private enum SearchType{
+
+        GELIJK_AAN,
+        MINDER_DAN,
+        MEER_DAN;
+    }
 
     @Inject
     Stocks stocks;
 
-    @Override
+
+    @Action
+    @ActionLayout(named = "Voorraden zoeken")
+    @MemberOrder(sequence = "2")
+    public List<Stock> findByAmount(@ParameterLayout(named = "Methode")final SearchType type, @ParameterLayout(named = "Hoeveelheid")final Integer amount){
+
+        switch (type){
+
+            case GELIJK_AAN: return stocks.findByAmount(amount);
+            case MINDER_DAN: return stocks.findByAmountLessThan(amount);
+            case MEER_DAN: return stocks.findByAmountMoreThan(amount);
+        }
+        return stocks.findByAmount(amount);
+
+    }
+
+    //region > listAll (action)
+    @Action
+    @ActionLayout(named = "Alle voorraden")
+    @MemberOrder(sequence = "1")
     public List<Stock> listAll() {
         return stocks.listAll();
     }
+    //endregion
 
-    @Override
-    public List<Stock> findByProduct(Product product) {
-        return stocks.findByProduct(product);
+    public SearchType default0FindByAmount() {
+        return SearchType.GELIJK_AAN;
     }
 
-    @Override
-    public List<Stock> findByAmount(Integer amount) {
-        return stocks.findByAmount(amount);
-    }
 
-    @Override
-    public List<Stock> findByAmountLessThan(Integer amount) {
-        return stocks.findByAmountLessThan(amount);
-    }
 
-    @Override
-    public List<Stock> findByAmountMoreThan(Integer amount) {
-        return stocks.findByAmountMoreThan(amount);
-    }
 }

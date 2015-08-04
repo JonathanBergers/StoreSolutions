@@ -10,7 +10,6 @@ import domainapp.fixture.modules.stockpilemanagement.ProductsFixture;
 import domainapp.fixture.modules.stockpilemanagement.StockFixture;
 import domainapp.integtests.tests.SimpleAppIntegTest;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import javax.inject.Inject;
@@ -26,7 +25,7 @@ public class StockIntegTest extends SimpleAppIntegTest{
 
 
     protected final Integer CREATE_AMOUNT = 99999;
-    protected final String FIRST_PRODUCT_TITLE = ProductsFixture.NAMES.get(0);
+    protected final String FIRST_PRODUCT_TITLE = ProductsFixture.TITLES.get(0);
 
     protected Product testProduct;
 
@@ -36,20 +35,13 @@ public class StockIntegTest extends SimpleAppIntegTest{
     @Inject
     Products products;
 
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
 
-
-        scenarioExecution().install(new TeardownFixture());
-        scenarioExecution().install(new ProductsFixture());
-        scenarioExecution().install(new StockFixture());
-
-
-
-    }
 
     @Before
     public void setUp(){
+        scenarioExecution().install(new TeardownFixture());
+        scenarioExecution().install(new ProductsFixture());
+        scenarioExecution().install(new StockFixture());
 
         testProduct = products.findByTitle(FIRST_PRODUCT_TITLE).get(0);
     }
