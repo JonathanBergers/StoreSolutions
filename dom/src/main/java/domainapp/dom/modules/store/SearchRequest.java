@@ -100,15 +100,15 @@ public class SearchRequest {
 
 
 
+    
 
-
-    // ---- ADD ELEMENT --------------//
+    // ---- ELEMENT --------------//
 
     //region > addElement (action)
     @MemberOrder(sequence = "1")
     @Action
-    @ActionLayout(named = "Bestaand text attribuut")
-    public SearchRequest addTextElement(@ParameterLayout(named = "Soort")final String type,
+    @ActionLayout(named = "Voeg filter toe")
+    public SearchRequest addElement(@ParameterLayout(named = "Soort")final String type,
                                          @ParameterLayout(named = "Waarde") final ProductElement element){
 
 
@@ -121,17 +121,21 @@ public class SearchRequest {
 
     }
 
+    public void clearProductElements(){
+        getProductElements().clear();
+    }
+
     public void addToProductElements(ProductElement productElement){
         getProductElements().add(productElement);
 
     }
 
-    public Set<String> choices0AddTextElement() {
+    public Set<String> choices0AddElement() {
         return getTypesFromElements(productElementsInject.listAll());
     }
 
 
-    public Set<ProductElement> choices1AddTextElement(final String type) {
+    public Set<ProductElement> choices1AddElement(final String type) {
 
         if(type == null){
             return new TreeSet<ProductElement>();
@@ -150,11 +154,27 @@ public class SearchRequest {
 
 
 
-        // ====== ADD ELEMENT ============//
 
 
 
 
+    //region > addElement (action)
+    @MemberOrder(sequence = "1")
+    @Action
+    @ActionLayout(named = "Wis filters")
+    public SearchRequest removeElements(){
+
+
+
+        clearProductElements();
+
+
+        return this;
+
+
+    }
+
+    // ====== ELEMENT ============//
     @Inject
     ProductElements productElementsInject;
 
