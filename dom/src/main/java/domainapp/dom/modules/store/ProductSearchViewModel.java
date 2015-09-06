@@ -1,6 +1,7 @@
 package domainapp.dom.modules.store;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import domainapp.dom.modules.stockpilemanagement.product.Product;
 import domainapp.dom.modules.stockpilemanagement.product.Products;
 import domainapp.dom.modules.stockpilemanagement.product.element.ProductElement;
@@ -10,10 +11,9 @@ import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.*;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 /**
  * Created by jonathan on 29-7-15.
@@ -67,25 +67,58 @@ public class ProductSearchViewModel {
     }
     //endregion
 
-//    private void addProductElement(final ProductElement productElement){
-//        productElements.add(productElement);
-//    }
-//    //endregion
+
+
+
+
+    // ---- ADD ELEMENT --------------//
 
     //region > addElement (action)
     @MemberOrder(sequence = "1")
     @Action
     @ActionLayout(named = "Bestaand text attribuut")
-    public ProductSearchViewModel addTextElement(@ParameterLayout(named = "Soort")final String type,
-                                         @ParameterLayout(named = "Waarde")final String value){
+    public void addTextElement(@ParameterLayout(named = "Soort")final String type,
+                                         @ParameterLayout(named = "Waarde")final ProductElement element){
 
 
-        ProductElementText pe = createProductElementText(null, type,value);
-        productElements.add(pe);
-        search();
-        return this;
+
+
+
+
 
     }
+
+    public Set<String> choices0AddTextElement() {
+        return getTypesFromElements(productElementsInject.listAll());
+    }
+
+
+    public Set<ProductElement> choices1AddTextElement(final String type) {
+
+        if(type == null){
+            return new TreeSet<ProductElement>();
+        }
+        return Sets.newTreeSet(productElementsInject.findByType(type));
+    }
+
+
+
+    @Programmatic
+    private SortedSet<String> getTypesFromElements(List<? extends ProductElement> elements){
+
+        SortedSet<String> types = elements.stream().map(ProductElement::getType).collect(Collectors.toCollection(() -> new TreeSet<>()));
+        return types;
+    }
+
+
+
+        // ====== ADD ELEMENT ============//
+
+
+
+
+
+
 
 
 

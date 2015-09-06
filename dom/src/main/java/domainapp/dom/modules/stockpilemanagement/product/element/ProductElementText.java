@@ -33,6 +33,9 @@ public class ProductElementText extends ProductElement<ProductElementText> {
     public int compareTo(ProductElementText o) {
         return getValue().toLowerCase().compareTo(o.getValue().toLowerCase());
     }
+
+
+
     //endregion
 
 }

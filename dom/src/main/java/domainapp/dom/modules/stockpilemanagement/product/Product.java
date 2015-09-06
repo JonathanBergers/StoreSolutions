@@ -84,6 +84,10 @@ public class Product{
 
 
 
+
+
+
+
     @Inject
     DomainObjectContainer container;
 

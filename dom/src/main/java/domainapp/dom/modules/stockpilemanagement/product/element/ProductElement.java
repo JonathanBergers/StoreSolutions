@@ -26,6 +26,10 @@ public abstract class ProductElement<T extends ProductElement> implements Compar
 
 
 
+    public String title(){
+        return displayValue;
+    }
+
     //region > type (property)
     private String type;
 
@@ -75,5 +79,13 @@ public abstract class ProductElement<T extends ProductElement> implements Compar
     //endregion
 
 
+    @Override
+    public boolean equals(Object obj) {
 
+        if(obj instanceof ProductElement){
+            return getDisplayValue().equals(((ProductElement)obj).getDisplayValue());
+        }
+        return super.equals(obj);
+
+    }
 }
