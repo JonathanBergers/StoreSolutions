@@ -64,7 +64,7 @@ msgstr ""
 
 
 #: domainapp.dom.modules.stockpilemanagement.product.ProductContributions#addTextElement()
-#: domainapp.dom.modules.store.ProductSearchViewModel#addTextElement()
+#: domainapp.dom.modules.store.SearchRequest#addTextElement()
 msgid "Bestaand text attribuut"
 msgstr ""
 
@@ -103,7 +103,7 @@ msgid "Eenheid"
 msgstr ""
 
 
-#: domainapp.dom.modules.store.ProductSearchViewModel#productElements
+#: domainapp.dom.modules.store.SearchRequest#productElements
 msgid "Filters"
 msgstr ""
 
@@ -140,7 +140,7 @@ msgid "General"
 msgstr ""
 
 
-#: domainapp.dom.modules.store.ProductSearchViewModel#products
+#: domainapp.dom.modules.store.SearchRequest#products
 msgid "Gevonden producten"
 msgstr ""
 
@@ -328,7 +328,7 @@ msgstr ""
 #: domainapp.dom.modules.stockpilemanagement.product.ProductContributions#addTextElement(domainapp.dom.modules.stockpilemanagement.product.Product,java.lang.String,java.lang.String)
 #: domainapp.dom.modules.stockpilemanagement.product.ProductContributions#newNumericElement(domainapp.dom.modules.stockpilemanagement.product.Product,java.lang.String,int,domainapp.dom.modules.stockpilemanagement.product.element.ProductElementEntity)
 #: domainapp.dom.modules.stockpilemanagement.product.ProductContributions#newTextElement(domainapp.dom.modules.stockpilemanagement.product.Product,java.lang.String,java.lang.String)
-#: domainapp.dom.modules.store.ProductSearchViewModel#addTextElement(domainapp.dom.modules.stockpilemanagement.product.Product,java.lang.String,java.lang.String)
+#: domainapp.dom.modules.store.SearchRequest#addTextElement(domainapp.dom.modules.stockpilemanagement.product.Product,java.lang.String,java.lang.String)
 msgid "Soort"
 msgstr ""
 
@@ -470,7 +470,7 @@ msgstr ""
 #: domainapp.dom.modules.stockpilemanagement.product.element.ProductElement#displayValue
 #: domainapp.dom.modules.stockpilemanagement.product.element.ProductElementNumeric#displayValue
 #: domainapp.dom.modules.stockpilemanagement.product.element.ProductElementText#displayValue
-#: domainapp.dom.modules.store.ProductSearchViewModel#addTextElement(domainapp.dom.modules.stockpilemanagement.product.Product,java.lang.String,java.lang.String)
+#: domainapp.dom.modules.store.SearchRequest#addTextElement(domainapp.dom.modules.stockpilemanagement.product.Product,java.lang.String,java.lang.String)
 msgid "Waarde"
 msgstr ""
 

@@ -68,7 +68,10 @@ public class DomainAppFixturesService extends FixtureScripts {
     @MemberOrder(sequence="20")
     public List<FixtureResult> runFixtureScript() {
 
-        return new StoreFixtureScript().run("");
+
+
+        return runFixtureScript(new StoreFixtureScript(), "");
+
 
     }
 

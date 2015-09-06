@@ -8,6 +8,7 @@ import domainapp.dom.modules.stockpilemanagement.product.element.ProductElementT
 import domainapp.dom.modules.stockpilemanagement.product.element.ProductElements;
 import org.apache.isis.applib.annotation.DomainService;
 import org.apache.isis.applib.annotation.MemberOrder;
+import org.apache.isis.applib.annotation.NatureOfService;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import java.util.List;
  * Created by jonathan on 4-8-15.
  */
 
-@DomainService
+@DomainService(nature = NatureOfService.VIEW_CONTRIBUTIONS_ONLY)
 public class ProductSearchService {
 
 

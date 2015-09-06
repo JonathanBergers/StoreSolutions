@@ -1,7 +1,6 @@
 package domainapp.dom.modules.store;
 
 import domainapp.dom.util.SearchTypes;
-import domainapp.dom.util.StorePredicates;
 import domainapp.dom.modules.stockpilemanagement.product.ProductRepo;
 import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.*;
@@ -40,8 +39,12 @@ public class PricedProductRepo extends ProductRepo{
     @Action
     @ActionLayout(named = "Uitgebreid zoeken")
     @MemberOrder(sequence = "4")
-    public ProductSearchViewModel findByExtended(){
-        return new ProductSearchViewModel();
+    public SearchRequest findByExtended(){
+
+        SearchRequest s  = container.newTransientInstance(SearchRequest.class);
+        s.setUsername(container.getUser().getName());
+        container.persistIfNotAlready(s);
+        return s;
     }
 
 
