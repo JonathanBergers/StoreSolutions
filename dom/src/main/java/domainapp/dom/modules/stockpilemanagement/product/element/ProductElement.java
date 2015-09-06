@@ -83,7 +83,9 @@ public abstract class ProductElement<T extends ProductElement> implements Compar
     public boolean equals(Object obj) {
 
         if(obj instanceof ProductElement){
-            return getDisplayValue().equals(((ProductElement)obj).getDisplayValue());
+
+            ProductElement e = (ProductElement) obj;
+            return getDisplayValue().equals(e.getDisplayValue()) && getType().equals(e.getType());
         }
         return super.equals(obj);
 

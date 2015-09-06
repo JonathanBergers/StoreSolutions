@@ -30,18 +30,18 @@ public class ProductSearchViewModel {
     }
 
 
-
-
-
-
+    public ProductSearchViewModel(List<ProductElement> productElements) {
+        this.productElements = productElements;
+    }
 
     //region > products (property)
     private List<Product> products = new ArrayList<>();
 
     @MemberOrder(sequence = "2")
-    @CollectionLayout(named = "Gevonden producten")
+    @CollectionLayout(named = "Gevonden producten",render = RenderType.EAGERLY)
     public List<Product> getProducts() {
-        return products;
+        return productsInject.findByProductElements(getProductElements());
+
     }
 
     public void setProducts(final List<Product> products) {
@@ -77,14 +77,17 @@ public class ProductSearchViewModel {
     @MemberOrder(sequence = "1")
     @Action
     @ActionLayout(named = "Bestaand text attribuut")
-    public void addTextElement(@ParameterLayout(named = "Soort")final String type,
-                                         @ParameterLayout(named = "Waarde")final ProductElement element){
+    public ProductSearchViewModel addTextElement(@ParameterLayout(named = "Soort")final String type,
+                                         @ParameterLayout(named = "Waarde") final ProductElement element){
 
 
 
 
 
+        productElements.add(element);
+        //search();
 
+        return new ProductSearchViewModel(getProductElements());
 
     }
 
