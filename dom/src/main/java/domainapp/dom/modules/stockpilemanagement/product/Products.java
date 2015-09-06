@@ -46,7 +46,7 @@ public class Products implements ProductsInterface{
     }
 
     @Programmatic
-    public List<Product> findByProfileElements(List<ProductElement> productElements) {
+    public List<Product> findByProductElements(List<ProductElement> productElements) {
 
 
         return container.allMatches(Product.class, StorePredicates.ProductPredicate.thoseWIthProductElements(productElements));

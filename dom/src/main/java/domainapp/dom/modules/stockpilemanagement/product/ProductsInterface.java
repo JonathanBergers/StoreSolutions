@@ -18,7 +18,7 @@ public interface ProductsInterface {
 
     public List<Product> findByDescriptionContains(final String text);
 
-    public List<Product> findByProfileElements(List<ProductElement> productElements);
+    public List<Product> findByProductElements(List<ProductElement> productElements);
 
 
     public List<Product> findByTitleContains(String title);

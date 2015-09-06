@@ -65,6 +65,11 @@ public class ProductElements implements ProductElementsInterface {
         return container.allMatches(ProductElement.class, StorePredicates.ProductElementPredicates.thoseWithProduct(product));
     }
 
+    @Override
+    public List<ProductElement> findByDisplayValueStartsWith(String displayValue) {
+        return container.allMatches(ProductElement.class, StorePredicates.ProductElementPredicates.thoseWithDisplayValueStartsWith(displayValue));
+    }
+
     @Programmatic
     public ProductElementText createProductElementText(Product product, final String type, final String value) {
         ProductElementText e = container.newTransientInstance(ProductElementText.class);

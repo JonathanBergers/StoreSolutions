@@ -34,6 +34,8 @@ public interface ProductElementsInterface {
     public List<ProductElement> findByProduct(Product product);
 
 
+    public List<ProductElement> findByDisplayValueStartsWith(String displayValue);
+
 
 
     public ProductElementText createProductElementText(Product product, final String type, final String value);

@@ -3,6 +3,7 @@ package domainapp.dom.modules.stockpilemanagement.product.element;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.PropertyLayout;
+import org.apache.isis.applib.util.ObjectContracts;
 
 import javax.jdo.annotations.*;
 
@@ -48,8 +49,15 @@ public class ProductElementNumeric extends ProductElement<ProductElementNumeric>
 
     @Override
     public int compareTo(ProductElementNumeric o) {
-        //TODO
+
+        if(getValue() > o.getValue()){
+            return 1;
+        }else if(getValue() < o.getValue()){
+            return -1;
+        }
+
         return 0;
+
     }
 
 

@@ -1,6 +1,8 @@
 package domainapp.dom.modules.store;
 
+import com.google.common.collect.Lists;
 import domainapp.dom.modules.stockpilemanagement.product.Product;
+import domainapp.dom.modules.stockpilemanagement.product.Products;
 import domainapp.dom.modules.stockpilemanagement.product.element.ProductElement;
 import domainapp.dom.modules.stockpilemanagement.product.element.ProductElementText;
 import domainapp.dom.modules.stockpilemanagement.product.element.ProductElements;
@@ -8,7 +10,7 @@ import org.apache.isis.applib.DomainObjectContainer;
 import org.apache.isis.applib.annotation.*;
 
 import javax.inject.Inject;
-import javax.jdo.annotations.NotPersistent;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -27,16 +29,14 @@ public class ProductSearchViewModel {
     public ProductSearchViewModel() {
     }
 
-    public ProductSearchViewModel(SortedSet<ProductElement> productElements) {
-        this.productElements = productElements;
-    }
+
 
 
 
 
 
     //region > products (property)
-    private List<Product> products;
+    private List<Product> products = new ArrayList<>();
 
     @MemberOrder(sequence = "2")
     @CollectionLayout(named = "Gevonden producten")
@@ -48,21 +48,24 @@ public class ProductSearchViewModel {
         this.products = products;
     }
 
+
+
     //endregion
 
 
     //region > productElements (property)
-    private SortedSet<ProductElement> productElements = new TreeSet<>();
+    private List<ProductElement> productElements = new ArrayList<>();
 
     @MemberOrder(sequence = "1")
-    @CollectionLayout(named = "Filters")
-    public SortedSet<ProductElement> getProductElements() {
+    @CollectionLayout(named = "Filters", render = RenderType.EAGERLY)
+    public List<ProductElement> getProductElements() {
         return productElements;
     }
 
-    public void setProductElements(final SortedSet<ProductElement> productElements) {
+    public void setProductElements(final List<ProductElement> productElements) {
         this.productElements = productElements;
     }
+    //endregion
 
 //    private void addProductElement(final ProductElement productElement){
 //        productElements.add(productElement);
@@ -73,19 +76,22 @@ public class ProductSearchViewModel {
     @MemberOrder(sequence = "1")
     @Action
     @ActionLayout(named = "Bestaand text attribuut")
-    public ProductSearchViewModel addTextElement(final Product product, @ParameterLayout(named = "Soort")final String type,
+    public ProductSearchViewModel addTextElement(@ParameterLayout(named = "Soort")final String type,
                                          @ParameterLayout(named = "Waarde")final String value){
 
 
-        ProductElementText pe = createProductElementText(product, type,value);
+        ProductElementText pe = createProductElementText(null, type,value);
         productElements.add(pe);
-        return new ProductSearchViewModel(getProductElements());
+        search();
+        return this;
 
     }
 
+
+
     @Programmatic
     public ProductElementText createProductElementText(Product product, final String type, final String value) {
-        ProductElementText e = container.newTransientInstance(ProductElementText.class);
+        ProductElementText e = new ProductElementText();
         e.setProduct(product);
         e.setType(type);
         e.setValue(value);
@@ -94,8 +100,20 @@ public class ProductSearchViewModel {
         return e;
     }
 
+
+    @Programmatic
+    private void search(){
+
+        setProducts(productsInject.findByProductElements(getProductElements()));
+
+    }
+
     @Inject
     ProductElements productElementsInject;
+
+    @Inject
+    Products productsInject;
+
     @Inject
     DomainObjectContainer container;
 

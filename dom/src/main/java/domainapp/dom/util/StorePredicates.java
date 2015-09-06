@@ -217,6 +217,17 @@ public class StorePredicates {
             };
         }
 
+        public static Predicate<ProductElement> thoseWithDisplayValueStartsWith(final String displayValue){
+
+            return new Predicate<ProductElement>() {
+                @Override
+                public boolean apply(final ProductElement productElement) {
+                    return productElement.getDisplayValue().toLowerCase().startsWith(displayValue.toLowerCase());
+                }
+            };
+
+        }
+
 
     }
 
